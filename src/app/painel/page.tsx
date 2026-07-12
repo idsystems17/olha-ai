@@ -1,5 +1,15 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { ChatSuporte } from '@/components/ChatSuporte'
+
+function montarLinkWhatsappSuporte(nomeNegocio: string): string | null {
+  const numero = process.env.SUPORTE_WHATSAPP
+  if (!numero) return null
+  const mensagem = encodeURIComponent(
+    `Oi! Sou dona do catálogo "${nomeNegocio}" no Olha Aí e preciso de ajuda.`
+  )
+  return `https://wa.me/${numero}?text=${mensagem}`
+}
 
 export default async function PainelPage() {
   const supabase = await createClient()
@@ -27,6 +37,10 @@ export default async function PainelPage() {
           </div>
         )}
       </div>
+
+      <ChatSuporte
+        linkWhatsappSuporte={tenant ? montarLinkWhatsappSuporte(tenant.name) : null}
+      />
     </div>
   )
 }
