@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { ChatSuporte } from '@/components/ChatSuporte'
+import { PainelClient } from '@/components/painel/PainelClient'
 
 function montarLinkWhatsappSuporte(nomeNegocio: string): string | null {
   const numero = process.env.SUPORTE_WHATSAPP
@@ -18,29 +19,22 @@ export default async function PainelPage() {
 
   const { data: tenant } = await supabase
     .from('tenants')
-    .select('name, slug, trial_started_at, is_subscribed')
+    .select('id, name, slug, bio, logo_url, cor_principal, cor_secundaria, is_subscribed')
     .eq('user_id', user.id)
     .single()
 
-  return (
-    <div className="min-h-screen p-8 bg-slate-50">
-      <div className="max-w-md mx-auto bg-white rounded-2xl shadow p-6">
-        <h1 className="text-xl font-bold text-slate-800">Painel — em construção</h1>
-        <p className="text-sm text-slate-500 mt-2">
-          Login funcionando! Editor de itens e personalização chegam na Fase 2.
-        </p>
-        {tenant && (
-          <div className="mt-4 text-sm text-slate-600 space-y-1">
-            <p><strong>Negócio:</strong> {tenant.name}</p>
-            <p><strong>Link:</strong> /{tenant.slug}</p>
-            <p><strong>Assinante:</strong> {tenant.is_subscribed ? 'Sim' : 'Não (trial)'}</p>
-          </div>
-        )}
-      </div>
+  if (!tenant) redirect('/login')
 
-      <ChatSuporte
-        linkWhatsappSuporte={tenant ? montarLinkWhatsappSuporte(tenant.name) : null}
-      />
+  const { data: items } = await supabase
+    .from('items')
+    .select('id, name, price, description, image_url, is_available_today')
+    .eq('tenant_id', tenant.id)
+    .order('created_at', { ascending: false })
+
+  return (
+    <div className="min-h-screen p-4 sm:p-8 bg-slate-50">
+      <PainelClient tenant={tenant} itemsIniciais={items ?? []} />
+      <ChatSuporte linkWhatsappSuporte={montarLinkWhatsappSuporte(tenant.name)} />
     </div>
   )
 }
