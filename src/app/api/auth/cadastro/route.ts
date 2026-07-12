@@ -2,10 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { slugify, SLUGS_RESERVADOS } from '@/lib/slug'
-
-function normalizarCpf(cpf: string): string {
-  return cpf.replace(/\D/g, '')
-}
+import { normalizarCpf, hashCpf } from '@/lib/cpf'
 
 function normalizarWhatsapp(whatsapp: string): string {
   return whatsapp.replace(/\D/g, '')
@@ -42,12 +39,14 @@ export async function POST(request: NextRequest) {
   }
 
   const admin = createAdminClient()
+  const cpfHash = hashCpf(cpf)
 
-  // Anti-abuso: CPF já usado antes (mesmo que o catálogo anterior já tenha sido excluído)
+  // Anti-abuso: CPF já usado antes (mesmo que o catálogo anterior já tenha sido excluído).
+  // Só o hash é comparado — o CPF em texto puro nunca é gravado no banco.
   const { data: cpfExistente } = await admin
     .from('cpf_usados')
-    .select('cpf')
-    .eq('cpf', cpf)
+    .select('cpf_hash')
+    .eq('cpf_hash', cpfHash)
     .maybeSingle()
 
   if (cpfExistente) {
@@ -105,7 +104,7 @@ export async function POST(request: NextRequest) {
     name: nomeNegocio,
     slug,
     whatsapp,
-    cpf,
+    cpf_hash: cpfHash,
   })
 
   if (erroTenant) {
@@ -115,7 +114,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Erro ao criar catálogo. Tente novamente.' }, { status: 500 })
   }
 
-  await admin.from('cpf_usados').insert({ cpf })
+  await admin.from('cpf_usados').insert({ cpf_hash: cpfHash })
 
   return NextResponse.json({ ok: true, slug })
 }
