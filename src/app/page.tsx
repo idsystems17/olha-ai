@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MessageCircleHeart, ImagePlus, QrCode } from 'lucide-react'
-import { PALETA } from '@/lib/paleta'
 
 const PASSOS = [
   {
@@ -19,8 +19,6 @@ const PASSOS = [
     texto: 'Compartilha o link ou o QR code. Quem quiser pedir, clica e cai direto no seu WhatsApp.',
   },
 ] as const
-
-const CORES_DESTAQUE = [PALETA[7], PALETA[9], PALETA[5], PALETA[1]]
 
 export default function LandingPage() {
   return (
@@ -69,30 +67,21 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Prévia do catálogo — placeholder até a Izis trocar por prints reais de catálogos já em uso */}
+        {/* Print real de um catálogo de demonstração (Bolos da Ana) — trocar
+            por um catálogo real assim que a Izis tiver o primeiro cliente. */}
         <section className="max-w-4xl mx-auto px-6 pb-20">
           <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-6">
             Do jeito que o cliente vê
           </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {CORES_DESTAQUE.slice(0, 3).map((cor) => (
-              <div
-                key={cor.hex}
-                className="w-32 sm:w-36 aspect-[9/16] rounded-2xl border-4 border-white shadow-lg overflow-hidden flex-shrink-0"
-                style={{ background: cor.hex }}
-              >
-                <div className="h-full w-full flex flex-col items-center justify-center gap-2 p-3 text-white/90">
-                  <div className="w-8 h-8 rounded-full bg-white/20 border-2 border-white/40" />
-                  <div className="h-1.5 w-12 rounded-full bg-white/40" />
-                  <div className="h-1 w-16 rounded-full bg-white/25" />
-                  <div className="mt-2 w-full space-y-1.5">
-                    {[0, 1].map((j) => (
-                      <div key={j} className="h-5 rounded-lg bg-white/15 border border-white/20" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="max-w-[280px] mx-auto rounded-3xl border-4 border-white shadow-xl overflow-hidden">
+            <Image
+              src="/preview-catalogo.png"
+              alt="Exemplo de catálogo no Olha Aí, com fotos, preços e botão de pedido pelo WhatsApp"
+              width={840}
+              height={1326}
+              className="w-full h-auto"
+              priority
+            />
           </div>
         </section>
 
