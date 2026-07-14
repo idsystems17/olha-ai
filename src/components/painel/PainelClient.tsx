@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { AbaCardapio } from './AbaCardapio'
 import { AbaAparencia } from './AbaAparencia'
+import { AbaMeuLink } from './AbaMeuLink'
 
 type Item = {
   id: string
@@ -24,7 +25,7 @@ type Tenant = {
 }
 
 export function PainelClient({ tenant, itemsIniciais }: { tenant: Tenant; itemsIniciais: Item[] }) {
-  const [aba, setAba] = useState<'cardapio' | 'aparencia'>('cardapio')
+  const [aba, setAba] = useState<'cardapio' | 'aparencia' | 'meulink'>('cardapio')
 
   return (
     <div className="max-w-md mx-auto bg-white rounded-2xl shadow p-5">
@@ -48,13 +49,19 @@ export function PainelClient({ tenant, itemsIniciais }: { tenant: Tenant; itemsI
         >
           Aparência
         </button>
+        <button
+          onClick={() => setAba('meulink')}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
+            aba === 'meulink' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
+          }`}
+        >
+          Meu link
+        </button>
       </div>
 
-      {aba === 'cardapio' ? (
-        <AbaCardapio itemsIniciais={itemsIniciais} />
-      ) : (
-        <AbaAparencia tenant={tenant} />
-      )}
+      {aba === 'cardapio' && <AbaCardapio itemsIniciais={itemsIniciais} />}
+      {aba === 'aparencia' && <AbaAparencia tenant={tenant} />}
+      {aba === 'meulink' && <AbaMeuLink slug={tenant.slug} nomeNegocio={tenant.name} />}
     </div>
   )
 }

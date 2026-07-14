@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { Dancing_Script } from 'next/font/google'
 import { createClient } from '@/lib/supabase/server'
 import { corDeFundo } from '@/lib/paleta'
+import { linkPublico } from '@/lib/link-publico'
+import { CompartilharBotao } from '@/components/CompartilharBotao'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
@@ -82,6 +84,17 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
         )}
         <h1 className="text-2xl font-bold mt-4">{tenant.name}</h1>
         {tenant.bio && <p className="text-sm opacity-90 mt-1 max-w-sm mx-auto">{tenant.bio}</p>}
+
+        <div className="mt-4">
+          <CompartilharBotao
+            url={linkPublico(tenant.slug)}
+            titulo={tenant.name}
+            texto={`Dá uma olhada no catálogo de ${tenant.name}!`}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 transition px-3 py-1.5 rounded-full"
+          >
+            Indicar pra alguém
+          </CompartilharBotao>
+        </div>
       </header>
 
       <main className="flex-1 max-w-md w-full mx-auto px-4 py-6 space-y-3">
