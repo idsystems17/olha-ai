@@ -25,10 +25,12 @@ export function CatalogoLista({
   items,
   whatsapp,
   nomeNegocio,
+  abertoHoje,
 }: {
   items: Item[]
   whatsapp: string
   nomeNegocio: string
+  abertoHoje: boolean
 }) {
   const [busca, setBusca] = useState('')
 
@@ -47,6 +49,12 @@ export function CatalogoLista({
           className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-11 pr-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all shadow-sm"
         />
       </div>
+
+      {!abertoHoje && (
+        <p className="text-center text-xs font-semibold text-rose-600 bg-rose-50 rounded-xl py-2.5 px-3">
+          Fechado hoje — volte mais tarde pra fazer seu pedido.
+        </p>
+      )}
 
       {itemsFiltrados.length === 0 && (
         <p className="text-center text-sm text-slate-400 py-10">
@@ -84,7 +92,7 @@ export function CatalogoLista({
             )}
             <div className="flex items-center justify-between mt-2">
               <p className="text-sm font-bold text-slate-800">{formatarPreco(item.price)}</p>
-              {item.is_available_today && (
+              {item.is_available_today && abertoHoje && (
                 <a
                   href={linkWhatsappItem(whatsapp, nomeNegocio, item.name)}
                   target="_blank"

@@ -25,6 +25,7 @@ type Tenant = {
   cor_principal: string
   cor_secundaria: string | null
   is_subscribed: boolean
+  is_open_today: boolean
 }
 
 export function PainelClient({
@@ -40,8 +41,25 @@ export function PainelClient({
 }) {
   const [aba, setAba] = useState<'cardapio' | 'aparencia' | 'meulink' | 'conta'>('cardapio')
   const [bannerFechado, setBannerFechado] = useState(false)
+  const [aberto, setAberto] = useState(tenant.is_open_today)
+  const [salvandoStatus, setSalvandoStatus] = useState(false)
 
   const mostrarBannerTrial = !tenant.is_subscribed && diasDeTrialRestantes > 0 && !bannerFechado
+
+  async function alternarStatus() {
+    const novoValor = !aberto
+    setAberto(novoValor)
+    setSalvandoStatus(true)
+
+    const resposta = await fetch('/api/aparencia', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ is_open_today: novoValor }),
+    })
+
+    setSalvandoStatus(false)
+    if (!resposta.ok) setAberto(!novoValor)
+  }
 
   const abas = [
     { id: 'cardapio' as const, label: 'Cardápio', Icone: Layers },
@@ -72,6 +90,30 @@ export function PainelClient({
       </div>
 
       <div className="px-4 -mt-4 relative z-10 space-y-4">
+        <div className="flex items-center justify-between bg-white rounded-2xl shadow-sm px-4 py-3.5">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${aberto ? 'bg-emerald-500' : 'bg-slate-300'}`} />
+            <div className="min-w-0">
+              <p className="text-sm font-bold text-slate-800">Catálogo {aberto ? 'aberto' : 'fechado'} hoje</p>
+              <p className="text-xs text-slate-400">Clientes veem esse status na sua página</p>
+            </div>
+          </div>
+          <button
+            onClick={alternarStatus}
+            disabled={salvandoStatus}
+            className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 disabled:opacity-60 ${
+              aberto ? 'bg-emerald-500' : 'bg-slate-300'
+            }`}
+            aria-label={aberto ? 'Marcar catálogo como fechado hoje' : 'Marcar catálogo como aberto hoje'}
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
+                aberto ? 'translate-x-5' : ''
+              }`}
+            />
+          </button>
+        </div>
+
         {mostrarBannerTrial && (
           <div className="rounded-2xl bg-amber-50 border border-amber-100 p-4 relative">
             <button

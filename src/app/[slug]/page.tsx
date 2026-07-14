@@ -33,7 +33,7 @@ async function buscarDados(slug: string) {
 
   const { data: tenant } = await supabase
     .from('tenants_publicos')
-    .select('id, slug, name, logo_url, bio, cor_principal, cor_secundaria, whatsapp, is_active')
+    .select('id, slug, name, logo_url, bio, cor_principal, cor_secundaria, whatsapp, is_open_today, is_active')
     .eq('slug', slug)
     .maybeSingle()
 
@@ -114,7 +114,9 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
           <div className="flex items-center justify-center gap-6 text-xs">
             <div>
               <span className="text-slate-400">Status: </span>
-              <span className="text-emerald-600 font-bold">● Aberto</span>
+              <span className={`font-bold ${tenant.is_open_today ? 'text-emerald-600' : 'text-rose-600'}`}>
+                ● {tenant.is_open_today ? 'Aberto' : 'Fechado hoje'}
+              </span>
             </div>
             <div>
               <span className="text-slate-400">WhatsApp: </span>
@@ -124,7 +126,7 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
         </div>
       </div>
 
-      <CatalogoLista items={items} whatsapp={tenant.whatsapp} nomeNegocio={tenant.name} />
+      <CatalogoLista items={items} whatsapp={tenant.whatsapp} nomeNegocio={tenant.name} abertoHoje={tenant.is_open_today} />
 
       <footer className="py-6 text-center">
         <Link href="/" className={`${dancingScript.className} text-lg text-slate-300 hover:text-slate-400 transition`}>

@@ -9,6 +9,7 @@ type CorpoAparencia = {
   logo_url?: string
   cor_principal?: string
   cor_secundaria?: string | null
+  is_open_today?: boolean
 }
 
 const HEXES_PERMITIDOS = new Set<string>(PALETA.map((c) => c.hex))
@@ -57,6 +58,12 @@ export async function PATCH(request: NextRequest) {
     }
     atualizacao.cor_secundaria = body.cor_secundaria
   }
+  if (body.is_open_today !== undefined) {
+    if (typeof body.is_open_today !== 'boolean') {
+      return NextResponse.json({ error: 'Status inválido.' }, { status: 400 })
+    }
+    atualizacao.is_open_today = body.is_open_today
+  }
 
   if (Object.keys(atualizacao).length === 0) {
     return NextResponse.json({ error: 'Nada para atualizar.' }, { status: 400 })
@@ -66,7 +73,7 @@ export async function PATCH(request: NextRequest) {
     .from('tenants')
     .update(atualizacao)
     .eq('user_id', user.id)
-    .select('name, bio, logo_url, cor_principal, cor_secundaria')
+    .select('name, bio, logo_url, cor_principal, cor_secundaria, is_open_today')
     .single()
 
   if (error || !tenant) {
