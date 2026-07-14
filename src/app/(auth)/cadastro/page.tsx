@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Eye, EyeOff } from 'lucide-react'
 
 function formatarCpf(valor: string): string {
   const digitos = valor.replace(/\D/g, '').slice(0, 11)
@@ -31,6 +31,7 @@ export default function CadastroPage() {
   const [cpf, setCpf] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  const [mostrarSenha, setMostrarSenha] = useState(false)
   const [loading, setLoading] = useState(false)
   const [erro, setErro] = useState('')
 
@@ -85,7 +86,7 @@ export default function CadastroPage() {
             onChange={(e) => setNomeNegocio(e.target.value)}
             required
             maxLength={120}
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="tel"
@@ -93,7 +94,7 @@ export default function CadastroPage() {
             value={whatsapp}
             onChange={(e) => setWhatsapp(formatarWhatsapp(e.target.value))}
             required
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="text"
@@ -102,7 +103,7 @@ export default function CadastroPage() {
             onChange={(e) => setCpf(formatarCpf(e.target.value))}
             required
             inputMode="numeric"
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="email"
@@ -111,18 +112,28 @@ export default function CadastroPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="email"
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
-          <input
-            type="password"
-            placeholder="Crie uma senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-            minLength={8}
-            autoComplete="new-password"
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
-          />
+          <div className="relative">
+            <input
+              type={mostrarSenha ? 'text' : 'password'}
+              placeholder="Crie uma senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+              minLength={8}
+              autoComplete="new-password"
+              className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            />
+            <button
+              type="button"
+              onClick={() => setMostrarSenha(!mostrarSenha)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+              aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+            >
+              {mostrarSenha ? <EyeOff size={15} /> : <Eye size={15} />}
+            </button>
+          </div>
 
           {erro && <p className="text-rose-600 text-xs text-center py-1">{erro}</p>}
 
