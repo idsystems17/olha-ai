@@ -48,6 +48,10 @@ export default async function PainelPage() {
       {trialAcabou && (
         <div className="max-w-md mx-auto mb-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-3 text-center">
           <p>Seu período grátis acabou. Seu catálogo está fora do ar pros clientes até você assinar.</p>
+          <p className="mt-1 text-xs">
+            Se não assinar logo, seus dados (fotos e cardápio) serão apagados. Se quiser voltar depois,
+            vai precisar montar o catálogo de novo.
+          </p>
           <a
             href={linkCheckoutKiwify(tenant.id)}
             target="_blank"
