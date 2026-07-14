@@ -41,7 +41,9 @@ export async function POST(request: NextRequest) {
   const admin = createAdminClient()
   const cpfHash = hashCpf(cpf)
 
-  // Anti-abuso: CPF já usado antes (mesmo que o catálogo anterior já tenha sido excluído).
+  // Anti-abuso: CPF já usado antes (mesmo que o catálogo anterior já tenha sido excluído
+  // ao fim do trial sem assinatura). Não bloqueia o cadastro — ela pode voltar a virar
+  // cliente, só não ganha um novo período grátis (ver trial_started_at abaixo).
   // Só o hash é comparado — o CPF em texto puro nunca é gravado no banco.
   const { data: cpfExistente } = await admin
     .from('cpf_usados')
@@ -49,12 +51,7 @@ export async function POST(request: NextRequest) {
     .eq('cpf_hash', cpfHash)
     .maybeSingle()
 
-  if (cpfExistente) {
-    return NextResponse.json({
-      error: 'Este CPF já foi usado para criar um catálogo antes.',
-      code: 'cpf_usado',
-    }, { status: 409 })
-  }
+  const reativacao = Boolean(cpfExistente)
 
   // Gera um slug único a partir do nome do negócio
   let slug = slugify(nomeNegocio)
@@ -99,12 +96,20 @@ export async function POST(request: NextRequest) {
 
   const userId = novoUser.user.id
 
+  // Quem já usou o CPF antes (trial anterior não convertido em assinatura) não ganha
+  // um novo período grátis: o trial nasce já expirado, então a página pública só
+  // fica visível de novo depois que ela assinar de verdade (webhook da Kiwify).
+  const trialStartedAt = reativacao
+    ? new Date(Date.now() - 31 * 24 * 60 * 60 * 1000).toISOString()
+    : undefined
+
   const { error: erroTenant } = await admin.from('tenants').insert({
     user_id: userId,
     name: nomeNegocio,
     slug,
     whatsapp,
     cpf_hash: cpfHash,
+    ...(trialStartedAt ? { trial_started_at: trialStartedAt } : {}),
   })
 
   if (erroTenant) {
@@ -114,7 +119,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Erro ao criar catálogo. Tente novamente.' }, { status: 500 })
   }
 
-  await admin.from('cpf_usados').insert({ cpf_hash: cpfHash })
+  if (!reativacao) {
+    await admin.from('cpf_usados').insert({ cpf_hash: cpfHash })
+  }
 
-  return NextResponse.json({ ok: true, slug })
+  return NextResponse.json({ ok: true, slug, reativacao })
 }
