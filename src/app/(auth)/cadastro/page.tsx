@@ -86,7 +86,7 @@ export default function CadastroPage() {
             onChange={(e) => setNomeNegocio(e.target.value)}
             required
             maxLength={120}
-            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="tel"
@@ -94,7 +94,7 @@ export default function CadastroPage() {
             value={whatsapp}
             onChange={(e) => setWhatsapp(formatarWhatsapp(e.target.value))}
             required
-            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="text"
@@ -103,7 +103,7 @@ export default function CadastroPage() {
             onChange={(e) => setCpf(formatarCpf(e.target.value))}
             required
             inputMode="numeric"
-            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="email"
@@ -112,7 +112,7 @@ export default function CadastroPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="email"
-            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <div className="relative">
             <input
@@ -123,7 +123,7 @@ export default function CadastroPage() {
               required
               minLength={8}
               autoComplete="new-password"
-              className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+              className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
             />
             <button
               type="button"

@@ -99,7 +99,7 @@ function RedefinirSenhaContent() {
               onChange={(e) => setSenha(e.target.value)}
               required
               minLength={8}
-              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
             />
             <button
               type="button"
@@ -117,7 +117,7 @@ function RedefinirSenhaContent() {
             onChange={(e) => setConfirmarSenha(e.target.value)}
             required
             minLength={8}
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
 
           {erro && <p className="text-rose-600 text-xs text-center py-1">{erro}</p>}

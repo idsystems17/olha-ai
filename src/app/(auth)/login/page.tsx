@@ -51,7 +51,7 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="email"
-            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+            className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <div className="relative">
             <input
@@ -61,7 +61,7 @@ export default function LoginPage() {
               onChange={(e) => setSenha(e.target.value)}
               required
               autoComplete="current-password"
-              className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
+              className="w-full bg-white border border-slate-200 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
             />
             <button
               type="button"
