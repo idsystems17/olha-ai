@@ -12,6 +12,11 @@ function montarLinkWhatsappSuporte(nomeNegocio: string): string | null {
   return `https://wa.me/${numero}?text=${mensagem}`
 }
 
+export async function generateMetadata() {
+  const base = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '')
+  return { manifest: `${base}/api/manifest/painel` }
+}
+
 export default async function PainelPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

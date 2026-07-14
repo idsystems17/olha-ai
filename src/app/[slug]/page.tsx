@@ -51,9 +51,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const dados = await buscarDados(slug)
   if (!dados) return { title: 'Olha Aí' }
+
+  const base = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '')
+
   return {
     title: dados.tenant.name,
     description: dados.tenant.bio ?? `Catálogo de ${dados.tenant.name} no Olha Aí`,
+    manifest: `${base}/api/manifest/${slug}`,
   }
 }
 
