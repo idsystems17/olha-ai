@@ -1,7 +1,10 @@
+import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { ChatSuporte } from '@/components/ChatSuporte'
 import { PainelClient } from '@/components/painel/PainelClient'
+import { PopupAssinaturaAtiva } from '@/components/painel/PopupAssinaturaAtiva'
+import { linkCheckoutKiwify } from '@/lib/kiwify'
 
 function montarLinkWhatsappSuporte(nomeNegocio: string): string | null {
   const numero = process.env.SUPORTE_WHATSAPP
@@ -44,11 +47,22 @@ export default async function PainelPage() {
     <div className="min-h-screen p-4 sm:p-8 bg-slate-50">
       {trialAcabou && (
         <div className="max-w-md mx-auto mb-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-3 text-center">
-          Seu período grátis acabou. Seu catálogo está fora do ar pros clientes até você assinar.
+          <p>Seu período grátis acabou. Seu catálogo está fora do ar pros clientes até você assinar.</p>
+          <a
+            href={linkCheckoutKiwify(tenant.id)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-2 px-4 py-2 rounded-lg bg-amber-600 text-white text-xs font-semibold"
+          >
+            Assinar agora — R$ 19,90/mês
+          </a>
         </div>
       )}
       <PainelClient tenant={tenant} itemsIniciais={items ?? []} />
       <ChatSuporte linkWhatsappSuporte={montarLinkWhatsappSuporte(tenant.name)} />
+      <Suspense fallback={null}>
+        <PopupAssinaturaAtiva />
+      </Suspense>
     </div>
   )
 }
