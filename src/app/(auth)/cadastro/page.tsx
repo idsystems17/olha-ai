@@ -70,7 +70,7 @@ export default function CadastroPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 via-white to-rose-50">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-teal-50 via-white to-cyan-50">
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-slate-800">Olha Aí</h1>
@@ -85,7 +85,7 @@ export default function CadastroPage() {
             onChange={(e) => setNomeNegocio(e.target.value)}
             required
             maxLength={120}
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="tel"
@@ -93,7 +93,7 @@ export default function CadastroPage() {
             value={whatsapp}
             onChange={(e) => setWhatsapp(formatarWhatsapp(e.target.value))}
             required
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="text"
@@ -102,7 +102,7 @@ export default function CadastroPage() {
             onChange={(e) => setCpf(formatarCpf(e.target.value))}
             required
             inputMode="numeric"
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="email"
@@ -111,7 +111,7 @@ export default function CadastroPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="email"
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
           <input
             type="password"
@@ -121,7 +121,7 @@ export default function CadastroPage() {
             required
             minLength={8}
             autoComplete="new-password"
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
 
           {erro && <p className="text-rose-600 text-xs text-center py-1">{erro}</p>}
@@ -129,7 +129,7 @@ export default function CadastroPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide mt-1 flex items-center justify-center gap-2 transition-colors shadow-md"
+            className="w-full bg-teal-600 hover:bg-teal-700 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide mt-1 flex items-center justify-center gap-2 transition-colors shadow-md"
           >
             {loading ? (<><Loader2 size={14} className="animate-spin" /> Criando...</>) : 'Criar meu catálogo grátis'}
           </button>
@@ -137,7 +137,7 @@ export default function CadastroPage() {
 
         <p className="text-center mt-5 text-xs text-slate-500">
           Já tem conta?{' '}
-          <Link href="/login" className="text-orange-600 font-semibold">Entrar</Link>
+          <Link href="/login" className="text-teal-700 font-semibold">Entrar</Link>
         </p>
       </div>
     </div>

@@ -22,7 +22,7 @@ const PASSOS = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-orange-50 via-white to-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50 via-white to-white">
       <header className="max-w-5xl w-full mx-auto px-6 py-6 flex items-center justify-between">
         <span className="font-bold text-lg text-slate-800">Olha Aí</span>
         <Link href="/login" className="text-sm font-medium text-slate-500 hover:text-slate-700">
@@ -43,7 +43,7 @@ export default function LandingPage() {
           <div className="mt-8 flex flex-col items-center gap-3">
             <Link
               href="/cadastro"
-              className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
+              className="inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
             >
               Criar meu catálogo grátis
             </Link>
@@ -57,7 +57,7 @@ export default function LandingPage() {
           <div className="grid sm:grid-cols-3 gap-5">
             {PASSOS.map(({ icone: Icone, titulo, texto }) => (
               <div key={titulo} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 text-center">
-                <div className="w-11 h-11 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-3">
+                <div className="w-11 h-11 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mx-auto mb-3">
                   <Icone size={20} />
                 </div>
                 <h2 className="font-semibold text-slate-800 text-sm">{titulo}</h2>
@@ -93,7 +93,7 @@ export default function LandingPage() {
           </p>
           <Link
             href="/cadastro"
-            className="mt-6 inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
+            className="mt-6 inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
           >
             Criar meu catálogo grátis
           </Link>

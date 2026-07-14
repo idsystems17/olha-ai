@@ -56,7 +56,7 @@ function RedefinirSenhaContent() {
     }
   }
 
-  const cardBase = 'min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 via-white to-rose-50'
+  const cardBase = 'min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-teal-50 via-white to-cyan-50'
 
   if (erroParam === 'link-invalido' || sessaoValida === false) {
     return (
@@ -66,7 +66,7 @@ function RedefinirSenhaContent() {
           <p className="text-sm text-rose-600 bg-rose-50 rounded-xl p-3 mt-4">
             Este link é inválido ou já expirou.
           </p>
-          <a href="/esqueci-senha" className="inline-flex mt-5 bg-orange-500 text-white rounded-full px-6 py-3 text-sm font-medium">
+          <a href="/esqueci-senha" className="inline-flex mt-5 bg-teal-600 text-white rounded-full px-6 py-3 text-sm font-medium">
             Solicitar novo link
           </a>
         </div>
@@ -99,7 +99,7 @@ function RedefinirSenhaContent() {
               onChange={(e) => setSenha(e.target.value)}
               required
               minLength={8}
-              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 pr-11 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
             />
             <button
               type="button"
@@ -117,7 +117,7 @@ function RedefinirSenhaContent() {
             onChange={(e) => setConfirmarSenha(e.target.value)}
             required
             minLength={8}
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
           />
 
           {erro && <p className="text-rose-600 text-xs text-center py-1">{erro}</p>}
@@ -125,7 +125,7 @@ function RedefinirSenhaContent() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide mt-1 flex items-center justify-center gap-2 transition-colors shadow-md"
+            className="w-full bg-teal-600 hover:bg-teal-700 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide mt-1 flex items-center justify-center gap-2 transition-colors shadow-md"
           >
             {loading ? (<><Loader2 size={14} className="animate-spin" /> Salvando...</>) : 'Salvar nova senha'}
           </button>

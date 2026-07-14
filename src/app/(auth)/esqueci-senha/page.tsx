@@ -30,7 +30,7 @@ export default function EsqueciSenhaPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 via-white to-rose-50">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-teal-50 via-white to-cyan-50">
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-slate-800">Olha Aí</h1>
@@ -43,7 +43,7 @@ export default function EsqueciSenhaPage() {
             <p className="text-sm text-slate-600 leading-relaxed">
               Se esse e-mail tiver uma conta, você vai receber um link de recuperação em instantes.
             </p>
-            <Link href="/login" className="text-sm text-orange-600 font-semibold flex items-center gap-1 mt-2">
+            <Link href="/login" className="text-sm text-teal-700 font-semibold flex items-center gap-1 mt-2">
               <ArrowLeft size={14} /> Voltar para o login
             </Link>
           </div>
@@ -58,12 +58,12 @@ export default function EsqueciSenhaPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-teal-300 transition-all"
             />
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide flex items-center justify-center gap-2 transition-colors shadow-md"
+              className="w-full bg-teal-600 hover:bg-teal-700 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide flex items-center justify-center gap-2 transition-colors shadow-md"
             >
               {loading ? (<><Loader2 size={14} className="animate-spin" /> Enviando...</>) : 'Enviar link de recuperação'}
             </button>
