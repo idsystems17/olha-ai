@@ -131,13 +131,18 @@ export function AbaCardapio({ itemsIniciais }: { itemsIniciais: Item[] }) {
   return (
     <div className="space-y-4">
       {!formAberto && (
-        <button
-          onClick={abrirNovo}
-          className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-slate-300 py-3 text-sm font-semibold text-slate-500 hover:border-slate-400 hover:text-slate-700 transition"
-        >
-          <Plus size={18} />
-          Adicionar item
-        </button>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-bold uppercase tracking-wide text-slate-400">
+            Seus itens ({items.length})
+          </h2>
+          <button
+            onClick={abrirNovo}
+            className="flex items-center gap-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold px-3.5 py-2 transition"
+          >
+            <Plus size={14} />
+            Novo Item
+          </button>
+        </div>
       )}
 
       {formAberto && (
@@ -209,40 +214,57 @@ export function AbaCardapio({ itemsIniciais }: { itemsIniciais: Item[] }) {
         {items.map((item) => (
           <div
             key={item.id}
-            className="flex items-center gap-3 rounded-xl border border-slate-200 p-2.5 bg-white"
+            className="flex items-center gap-3 rounded-2xl border border-slate-100 shadow-sm p-2.5 bg-white"
           >
             {item.image_url ? (
               // eslint-disable-next-line @next/next/no-img-element -- foto vem do Supabase Storage
-              <img src={item.image_url} alt={item.name} className="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
+              <img src={item.image_url} alt={item.name} className="w-14 h-14 rounded-xl object-cover flex-shrink-0" />
             ) : (
-              <div className="w-14 h-14 rounded-lg bg-slate-100 flex-shrink-0" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex-shrink-0" />
             )}
 
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-slate-800 truncate">{item.name}</p>
+              <p className="text-sm font-bold text-slate-800 truncate">{item.name}</p>
               <p className="text-xs text-slate-500">{formatarPreco(item.price)}</p>
             </div>
 
-            <button
-              onClick={() => togglarDisponibilidade(item)}
-              className={`flex-shrink-0 relative w-10 h-6 rounded-full transition-colors ${
-                item.is_available_today ? 'bg-green-500' : 'bg-slate-300'
-              }`}
-              aria-label={item.is_available_today ? 'Tem hoje — clique pra desligar' : 'Não tem hoje — clique pra ligar'}
-              title={item.is_available_today ? 'Tem hoje' : 'Não tem hoje'}
-            >
+            <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
               <span
-                className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
-                  item.is_available_today ? 'translate-x-4' : ''
+                className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${
+                  item.is_available_today ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-400'
                 }`}
-              />
-            </button>
+              >
+                {item.is_available_today ? 'Tem hoje' : 'Acabou'}
+              </span>
+              <button
+                onClick={() => togglarDisponibilidade(item)}
+                className={`relative w-10 h-6 rounded-full transition-colors ${
+                  item.is_available_today ? 'bg-emerald-500' : 'bg-slate-300'
+                }`}
+                aria-label={item.is_available_today ? 'Tem hoje — clique pra desligar' : 'Não tem hoje — clique pra ligar'}
+                title={item.is_available_today ? 'Tem hoje' : 'Não tem hoje'}
+              >
+                <span
+                  className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
+                    item.is_available_today ? 'translate-x-4' : ''
+                  }`}
+                />
+              </button>
+            </div>
 
-            <button onClick={() => abrirEdicao(item)} className="flex-shrink-0 p-1.5 text-slate-400 hover:text-slate-700" aria-label="Editar">
-              <Pencil size={16} />
+            <button
+              onClick={() => abrirEdicao(item)}
+              className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700 transition"
+              aria-label="Editar"
+            >
+              <Pencil size={15} />
             </button>
-            <button onClick={() => excluir(item)} className="flex-shrink-0 p-1.5 text-slate-400 hover:text-red-600" aria-label="Excluir">
-              <Trash2 size={16} />
+            <button
+              onClick={() => excluir(item)}
+              className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-red-100 hover:text-red-600 transition"
+              aria-label="Excluir"
+            >
+              <Trash2 size={15} />
             </button>
           </div>
         ))}

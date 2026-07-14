@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { Eye, Sparkles, X, ArrowRight, Layers, Palette, QrCode, User } from 'lucide-react'
+import { corDeFundo } from '@/lib/paleta'
 import { AbaCardapio } from './AbaCardapio'
 import { AbaAparencia } from './AbaAparencia'
 import { AbaMeuLink } from './AbaMeuLink'
@@ -25,39 +27,107 @@ type Tenant = {
   is_subscribed: boolean
 }
 
-export function PainelClient({ tenant, itemsIniciais }: { tenant: Tenant; itemsIniciais: Item[] }) {
+export function PainelClient({
+  tenant,
+  itemsIniciais,
+  diasDeTrialRestantes,
+  linkCheckout,
+}: {
+  tenant: Tenant
+  itemsIniciais: Item[]
+  diasDeTrialRestantes: number
+  linkCheckout: string
+}) {
   const [aba, setAba] = useState<'cardapio' | 'aparencia' | 'meulink' | 'conta'>('cardapio')
+  const [bannerFechado, setBannerFechado] = useState(false)
+
+  const mostrarBannerTrial = !tenant.is_subscribed && diasDeTrialRestantes > 0 && !bannerFechado
 
   const abas = [
-    { id: 'cardapio' as const, label: 'Cardápio' },
-    { id: 'aparencia' as const, label: 'Aparência' },
-    { id: 'meulink' as const, label: 'Meu link' },
-    { id: 'conta' as const, label: 'Conta' },
+    { id: 'cardapio' as const, label: 'Cardápio', Icone: Layers },
+    { id: 'aparencia' as const, label: 'Aparência', Icone: Palette },
+    { id: 'meulink' as const, label: 'Meu link', Icone: QrCode },
+    { id: 'conta' as const, label: 'Conta', Icone: User },
   ]
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-2xl shadow p-5">
-      <h1 className="text-lg font-bold text-slate-800">{tenant.name}</h1>
-      <p className="text-xs text-slate-400 mb-4">olhaai.app/{tenant.slug}</p>
-
-      <div className="flex gap-1 p-1 bg-slate-100 rounded-xl mb-5">
-        {abas.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setAba(item.id)}
-            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
-              aba === item.id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
-            }`}
-          >
-            {item.label}
-          </button>
-        ))}
+    <div className="max-w-md mx-auto">
+      <div
+        className="rounded-b-3xl px-6 pt-8 pb-8 text-white flex items-start justify-between gap-3"
+        style={{ background: corDeFundo(tenant.cor_principal, tenant.cor_secundaria) }}
+      >
+        <div className="min-w-0">
+          <p className="text-xs font-semibold uppercase tracking-wide text-white/70">Painel de controle</p>
+          <h1 className="text-2xl font-bold leading-tight mt-1">{tenant.name}</h1>
+        </div>
+        <a
+          href={`/${tenant.slug}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-shrink-0 flex items-center gap-1.5 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 transition px-3.5 py-2.5 rounded-full whitespace-nowrap"
+        >
+          <Eye size={14} />
+          Ver Catálogo
+        </a>
       </div>
 
-      {aba === 'cardapio' && <AbaCardapio itemsIniciais={itemsIniciais} />}
-      {aba === 'aparencia' && <AbaAparencia tenant={tenant} />}
-      {aba === 'meulink' && <AbaMeuLink slug={tenant.slug} nomeNegocio={tenant.name} />}
-      {aba === 'conta' && <AbaConta />}
+      <div className="px-4 -mt-4 relative z-10 space-y-4">
+        {mostrarBannerTrial && (
+          <div className="rounded-2xl bg-amber-50 border border-amber-100 p-4 relative">
+            <button
+              onClick={() => setBannerFechado(true)}
+              aria-label="Fechar aviso"
+              className="absolute top-3 right-3 text-amber-400 hover:text-amber-600"
+            >
+              <X size={16} />
+            </button>
+            <div className="flex items-start gap-2 pr-6">
+              <Sparkles size={18} className="text-amber-500 flex-shrink-0 mt-0.5" />
+              <p className="text-sm font-bold text-slate-800">
+                Você tem {diasDeTrialRestantes} {diasDeTrialRestantes === 1 ? 'dia grátis' : 'dias grátis'} de Trial
+              </p>
+            </div>
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              No fim do teste, se não assinar, o catálogo é excluído para simplificar. Ative sua assinatura
+              para não perder nada.
+            </p>
+            <a
+              href={linkCheckout}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 w-full flex items-center justify-center gap-1.5 rounded-full bg-slate-900 text-white text-sm font-semibold py-3"
+            >
+              Ativar Assinatura por R$ 19,90/mês
+              <ArrowRight size={15} />
+            </a>
+          </div>
+        )}
+
+        <div className="bg-white rounded-2xl shadow-sm p-5">
+          {aba === 'cardapio' && <AbaCardapio itemsIniciais={itemsIniciais} />}
+          {aba === 'aparencia' && <AbaAparencia tenant={tenant} />}
+          {aba === 'meulink' && <AbaMeuLink slug={tenant.slug} nomeNegocio={tenant.name} />}
+          {aba === 'conta' && <AbaConta />}
+        </div>
+      </div>
+
+      <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-100 z-40">
+        <div className="max-w-md mx-auto flex items-center justify-around py-2">
+          {abas.map(({ id, label, Icone }) => (
+            <button
+              key={id}
+              onClick={() => setAba(id)}
+              className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition ${
+                aba === id ? 'text-teal-700' : 'text-slate-400'
+              }`}
+              aria-label={label}
+            >
+              <Icone size={20} />
+              <span className="text-[10px] font-semibold">{label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   )
 }

@@ -57,7 +57,7 @@ export function ChatSuporte({ linkWhatsappSuporte }: { linkWhatsappSuporte: stri
     return (
       <button
         onClick={() => setAberto(true)}
-        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-slate-900 text-white px-4 py-3 shadow-lg hover:bg-slate-800 transition"
+        className="fixed bottom-20 right-5 z-50 flex items-center gap-2 rounded-full bg-slate-900 text-white px-4 py-3 shadow-lg hover:bg-slate-800 transition"
         aria-label="Abrir chat de suporte"
       >
         <MessageCircle size={20} />
@@ -67,7 +67,7 @@ export function ChatSuporte({ linkWhatsappSuporte }: { linkWhatsappSuporte: stri
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[480px] max-h-[calc(100vh-2.5rem)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+    <div className="fixed bottom-20 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[480px] max-h-[calc(100vh-2.5rem)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
       <div className="flex items-center justify-between px-4 py-3 bg-slate-900 text-white">
         <span className="text-sm font-semibold">Suporte Olha Aí</span>
         <button onClick={() => setAberto(false)} aria-label="Fechar chat">
