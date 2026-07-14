@@ -9,20 +9,20 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
   const supabase = await createClient()
   const { data: tenant } = await supabase
     .from('tenants_publicos')
-    .select('name, logo_url, cor_principal')
+    .select('name, cor_principal')
     .eq('slug', slug)
     .maybeSingle()
 
   const nome = tenant?.name ?? 'Olha Aí'
   const iconUrl = `${base}/api/manifest/${slug}/icon`
 
-  const icons = tenant?.logo_url
-    ? [{ src: tenant.logo_url, sizes: 'any', type: 'image/jpeg', purpose: 'any' as const }]
-    : [
-        { src: `${iconUrl}?size=192`, sizes: '192x192', type: 'image/png', purpose: 'any' as const },
-        { src: `${iconUrl}?size=512`, sizes: '512x512', type: 'image/png', purpose: 'any' as const },
-        { src: `${iconUrl}?size=512`, sizes: '512x512', type: 'image/png', purpose: 'maskable' as const },
-      ]
+  // Sempre tamanhos numéricos explícitos batendo com o arquivo real gerado —
+  // o Windows ignora ícones declarados como sizes:"any" e cai no genérico.
+  const icons = [
+    { src: `${iconUrl}?size=192`, sizes: '192x192', type: 'image/png', purpose: 'any' as const },
+    { src: `${iconUrl}?size=512`, sizes: '512x512', type: 'image/png', purpose: 'any' as const },
+    { src: `${iconUrl}?size=512`, sizes: '512x512', type: 'image/png', purpose: 'maskable' as const },
+  ]
 
   const manifest = {
     name: nome,

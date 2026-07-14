@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { gerarIconeInicial } from '@/lib/gerar-icone-tenant'
+import { gerarIconeTenant } from '@/lib/gerar-icone-tenant'
 
 export const dynamic = 'force-dynamic'
 
@@ -10,9 +10,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
   const supabase = await createClient()
   const { data: tenant } = await supabase
     .from('tenants_publicos')
-    .select('name, cor_principal, cor_secundaria')
+    .select('name, logo_url, cor_principal, cor_secundaria')
     .eq('slug', slug)
     .maybeSingle()
 
-  return gerarIconeInicial(tenant, tamanho)
+  return gerarIconeTenant(tenant, tamanho)
 }

@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { gerarIconeInicial } from '@/lib/gerar-icone-tenant'
+import { gerarIconeTenant } from '@/lib/gerar-icone-tenant'
 
 export const dynamic = 'force-dynamic'
 export const size = { width: 32, height: 32 }
@@ -13,9 +13,5 @@ export default async function Icon({ params }: { params: Promise<{ slug: string 
     .eq('slug', slug)
     .maybeSingle()
 
-  if (tenant?.logo_url) {
-    return Response.redirect(tenant.logo_url)
-  }
-
-  return gerarIconeInicial(tenant, 32)
+  return gerarIconeTenant(tenant, 32)
 }
