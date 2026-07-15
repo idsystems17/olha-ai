@@ -41,7 +41,7 @@ export function AbaMeuLink({ slug, nomeNegocio }: { slug: string; nomeNegocio: s
       <CompartilharBotao
         url={url}
         titulo={nomeNegocio}
-        texto={`Dá uma olhada no catálogo de ${nomeNegocio}!`}
+        texto={nomeNegocio}
         className="w-full py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold flex items-center justify-center gap-2"
       >
         Compartilhar

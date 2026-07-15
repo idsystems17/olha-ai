@@ -1,4 +1,5 @@
 import { buscarTenantAutenticado } from '@/lib/tenant-autenticado'
+import { versaoAparencia } from '@/lib/versao-aparencia'
 
 export const dynamic = 'force-dynamic'
 
@@ -7,14 +8,15 @@ export async function GET() {
   const tenant = await buscarTenantAutenticado()
 
   const nome = tenant ? `${tenant.name} — Olha Aí` : 'Olha Aí'
+  const versao = versaoAparencia([tenant?.name, tenant?.logo_url, tenant?.cor_principal, tenant?.cor_secundaria])
   const iconUrl = `${base}/api/manifest/painel/icon`
 
   // Sempre tamanhos numéricos explícitos batendo com o arquivo real gerado —
   // o Windows ignora ícones declarados como sizes:"any" e cai no genérico.
   const icons = [
-    { src: `${iconUrl}?size=192`, sizes: '192x192', type: 'image/png', purpose: 'any' as const },
-    { src: `${iconUrl}?size=512`, sizes: '512x512', type: 'image/png', purpose: 'any' as const },
-    { src: `${iconUrl}?size=512`, sizes: '512x512', type: 'image/png', purpose: 'maskable' as const },
+    { src: `${iconUrl}?size=192&v=${versao}`, sizes: '192x192', type: 'image/png', purpose: 'any' as const },
+    { src: `${iconUrl}?size=512&v=${versao}`, sizes: '512x512', type: 'image/png', purpose: 'any' as const },
+    { src: `${iconUrl}?size=512&v=${versao}`, sizes: '512x512', type: 'image/png', purpose: 'maskable' as const },
   ]
 
   const manifest = {

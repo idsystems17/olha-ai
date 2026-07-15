@@ -5,6 +5,7 @@ import { AbaCardapio } from './AbaCardapio'
 import { AbaAparencia } from './AbaAparencia'
 import { AbaMeuLink } from './AbaMeuLink'
 import { AbaConta } from './AbaConta'
+import { InterruptorLoja } from './InterruptorLoja'
 
 type Item = {
   id: string
@@ -23,6 +24,7 @@ type Tenant = {
   cor_principal: string
   cor_secundaria: string | null
   is_subscribed: boolean
+  is_open: boolean
 }
 
 export function PainelClient({ tenant, itemsIniciais }: { tenant: Tenant; itemsIniciais: Item[] }) {
@@ -39,6 +41,8 @@ export function PainelClient({ tenant, itemsIniciais }: { tenant: Tenant; itemsI
     <div className="max-w-md mx-auto bg-white rounded-2xl shadow p-5">
       <h1 className="text-lg font-bold text-slate-800">{tenant.name}</h1>
       <p className="text-xs text-slate-400 mb-4">olhaai.app/{tenant.slug}</p>
+
+      <InterruptorLoja isOpenInicial={tenant.is_open} />
 
       <div className="flex gap-1 p-1 bg-slate-100 rounded-xl mb-5">
         {abas.map((item) => (

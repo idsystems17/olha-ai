@@ -9,6 +9,10 @@ import { CatalogoItens } from '@/components/CatalogoItens'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
+// Sem isso, o Next pode servir uma versão antiga da página (nome/bio) depois
+// que a vendedora edita a Aparência — precisa buscar do banco a cada visita.
+export const dynamic = 'force-dynamic'
+
 type Item = {
   id: string
   name: string
@@ -31,7 +35,7 @@ async function buscarDados(slug: string) {
 
   const { data: tenant } = await supabase
     .from('tenants_publicos')
-    .select('id, slug, name, logo_url, bio, cor_principal, cor_secundaria, whatsapp, is_active')
+    .select('id, slug, name, logo_url, bio, cor_principal, cor_secundaria, whatsapp, is_open, is_active')
     .eq('slug', slug)
     .maybeSingle()
 
@@ -76,7 +80,7 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
           <CompartilharBotao
             url={linkPublico(tenant.slug)}
             titulo={tenant.name}
-            texto={`Dá uma olhada no catálogo de ${tenant.name}!`}
+            texto={tenant.name}
             className="bg-white/20 hover:bg-white/35 text-white backdrop-blur-sm p-2 rounded-full transition"
           >
             <span className="sr-only">Compartilhar</span>
@@ -107,7 +111,12 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
 
           <div className="flex items-center gap-3 mt-3 pt-3 border-t border-slate-50 w-full justify-center text-[11px] text-slate-400 flex-wrap">
             <span>
-              Status: <span className="text-emerald-500 font-bold">● Aberto</span>
+              Status:{' '}
+              {tenant.is_open ? (
+                <span className="text-emerald-500 font-bold">● Aberto</span>
+              ) : (
+                <span className="text-slate-400 font-bold">● Fechado</span>
+              )}
             </span>
             <span>•</span>
             <span>
@@ -118,7 +127,12 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
       </div>
 
       <main className="flex-1 max-w-md w-full mx-auto px-4">
-        <CatalogoItens items={items} whatsapp={tenant.whatsapp} />
+        {!tenant.is_open && items.length > 0 && (
+          <p className="text-center text-xs text-slate-500 bg-slate-100 border border-slate-200 rounded-xl py-2 px-3 mb-3">
+            A loja está fechada no momento — dá pra ver o cardápio, mas não pra pedir agora.
+          </p>
+        )}
+        <CatalogoItens items={items} whatsapp={tenant.whatsapp} lojaAberta={tenant.is_open} />
       </main>
 
       <div className="px-4 py-6 mt-4 max-w-md w-full mx-auto">

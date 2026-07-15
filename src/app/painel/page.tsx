@@ -27,7 +27,7 @@ export default async function PainelPage() {
 
   const { data: tenant } = await supabase
     .from('tenants')
-    .select('id, name, slug, bio, logo_url, cor_principal, cor_secundaria, is_subscribed, trial_started_at')
+    .select('id, name, slug, bio, logo_url, cor_principal, cor_secundaria, is_subscribed, is_open, trial_started_at')
     .eq('user_id', user.id)
     .single()
 

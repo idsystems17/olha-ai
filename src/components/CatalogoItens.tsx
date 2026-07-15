@@ -21,7 +21,15 @@ function linkWhatsappItem(whatsapp: string, nomeItem: string): string {
   return `https://wa.me/${whatsapp}?text=${mensagem}`
 }
 
-export function CatalogoItens({ items, whatsapp }: { items: Item[]; whatsapp: string }) {
+export function CatalogoItens({
+  items,
+  whatsapp,
+  lojaAberta,
+}: {
+  items: Item[]
+  whatsapp: string
+  lojaAberta: boolean
+}) {
   const [busca, setBusca] = useState('')
 
   const alvo = busca.trim().toLowerCase()
@@ -103,7 +111,7 @@ export function CatalogoItens({ items, whatsapp }: { items: Item[]; whatsapp: st
 
             <div className="flex justify-between items-center mt-2 pt-2 border-t border-slate-50">
               <span className="font-bold text-slate-800 text-sm">{formatarPreco(item.price)}</span>
-              {item.is_available_today ? (
+              {item.is_available_today && lojaAberta ? (
                 <a
                   href={linkWhatsappItem(whatsapp, item.name)}
                   target="_blank"
@@ -119,7 +127,7 @@ export function CatalogoItens({ items, whatsapp }: { items: Item[]; whatsapp: st
                   disabled
                   className="text-[10px] font-bold py-1.5 px-3 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
                 >
-                  Avisar quando tiver
+                  {lojaAberta ? 'Avisar quando tiver' : 'Fechado no momento'}
                 </button>
               )}
             </div>
