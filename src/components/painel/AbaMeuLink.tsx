@@ -108,7 +108,7 @@ export function AbaMeuLink({ slug, nomeNegocio, logoUrl, corPrincipal, corSecund
   }
 
   return (
-    <div className="space-y-5 text-center">
+    <div className="space-y-3 text-center">
       <div className="h-2 w-full rounded-full" style={{ background: fundo }} />
 
       <div className="flex items-center gap-3 text-left">
@@ -139,10 +139,10 @@ export function AbaMeuLink({ slug, nomeNegocio, logoUrl, corPrincipal, corSecund
           <img
             src={qrDataUrl}
             alt={`QR code do catálogo de ${nomeNegocio}`}
-            className="w-48 h-48 rounded-xl border border-slate-200"
+            className="w-40 h-40 rounded-xl border border-slate-200"
           />
         ) : (
-          <div className="w-48 h-48 rounded-xl border border-slate-200 bg-slate-50 animate-pulse" />
+          <div className="w-40 h-40 rounded-xl border border-slate-200 bg-slate-50 animate-pulse" />
         )}
       </div>
 

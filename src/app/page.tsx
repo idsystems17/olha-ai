@@ -47,7 +47,7 @@ export default function LandingPage() {
             >
               Criar meu catálogo grátis
             </Link>
-            <p className="text-xs text-slate-400">
+            <p className="text-sm sm:text-base font-medium text-slate-600">
               30 dias grátis. Depois, R$ 19,90 por mês pra continuar no ar.
             </p>
           </div>

@@ -126,7 +126,7 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
         </div>
       </div>
 
-      <main className="flex-1 max-w-md w-full mx-auto px-4">
+      <main className="max-w-md w-full mx-auto px-4">
         {!tenant.is_open && items.length > 0 && (
           <p className="text-center text-xs text-slate-500 bg-slate-100 border border-slate-200 rounded-xl py-2 px-3 mb-3">
             A loja está fechada no momento — dá pra ver o cardápio, mas não pra pedir agora.

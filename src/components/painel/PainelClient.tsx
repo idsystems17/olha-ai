@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Layers, Palette, QrCode, UserCircle, Eye } from 'lucide-react'
 import { corDeFundo } from '@/lib/paleta'
+import { linkPublico } from '@/lib/link-publico'
 import { AbaCardapio } from './AbaCardapio'
 import { AbaAparencia } from './AbaAparencia'
 import { AbaMeuLink } from './AbaMeuLink'
@@ -63,8 +64,6 @@ export function PainelClient({
           </div>
           <a
             href={`/${tenant.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
             className="flex-shrink-0 bg-white/20 hover:bg-white/35 font-bold py-1.5 px-3 rounded-full text-xs flex items-center gap-1.5 transition"
           >
             <Eye className="w-3.5 h-3.5" />
@@ -82,7 +81,7 @@ export function PainelClient({
         />
 
         <div className="bg-white rounded-2xl shadow p-5">
-          <p className="text-xs text-slate-400 mb-4">olhaai.app/{tenant.slug}</p>
+          <p className="text-xs text-slate-400 mb-4 truncate">{linkPublico(tenant.slug).replace(/^https?:\/\//, '')}</p>
 
           <InterruptorLoja isOpenInicial={tenant.is_open} />
 
