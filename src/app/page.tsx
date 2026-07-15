@@ -83,6 +83,14 @@ export default function LandingPage() {
               priority
             />
           </div>
+          <div className="text-center mt-4">
+            <Link
+              href="/exemplo"
+              className="text-sm font-semibold text-orange-600 hover:text-orange-700 underline underline-offset-2"
+            >
+              Ver catálogo de exemplo ao vivo
+            </Link>
+          </div>
         </section>
 
         <section className="max-w-2xl mx-auto px-6 pb-24 text-center">
