@@ -88,7 +88,15 @@ export function PainelClient({
 
           {aba === 'cardapio' && <AbaCardapio itemsIniciais={itemsIniciais} />}
           {aba === 'aparencia' && <AbaAparencia tenant={tenant} />}
-          {aba === 'meulink' && <AbaMeuLink slug={tenant.slug} nomeNegocio={tenant.name} />}
+          {aba === 'meulink' && (
+            <AbaMeuLink
+              slug={tenant.slug}
+              nomeNegocio={tenant.name}
+              logoUrl={tenant.logo_url}
+              corPrincipal={tenant.cor_principal}
+              corSecundaria={tenant.cor_secundaria}
+            />
+          )}
           {aba === 'conta' && <AbaConta />}
         </div>
       </div>
