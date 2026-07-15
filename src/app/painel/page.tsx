@@ -1,19 +1,10 @@
 import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { ChatSuporte } from '@/components/ChatSuporte'
+import { SuporteFaq } from '@/components/SuporteFaq'
 import { PainelClient } from '@/components/painel/PainelClient'
 import { PopupAssinaturaAtiva } from '@/components/painel/PopupAssinaturaAtiva'
 import { linkCheckoutKiwify } from '@/lib/kiwify'
-
-function montarLinkWhatsappSuporte(nomeNegocio: string): string | null {
-  const numero = process.env.SUPORTE_WHATSAPP
-  if (!numero) return null
-  const mensagem = encodeURIComponent(
-    `Oi! Sou dona do catálogo "${nomeNegocio}" no Olha Aí e preciso de ajuda.`
-  )
-  return `https://wa.me/${numero}?text=${mensagem}`
-}
 
 export async function generateMetadata() {
   const base = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '')
@@ -55,7 +46,7 @@ export default async function PainelPage() {
         trialAcabou={trialAcabou}
         linkCheckout={linkCheckoutKiwify(tenant.id)}
       />
-      <ChatSuporte linkWhatsappSuporte={montarLinkWhatsappSuporte(tenant.name)} />
+      <SuporteFaq emailSuporte={process.env.NEXT_PUBLIC_SUPORTE_EMAIL ?? null} nomeNegocio={tenant.name} />
       <Suspense fallback={null}>
         <PopupAssinaturaAtiva />
       </Suspense>
