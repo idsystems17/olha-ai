@@ -33,9 +33,12 @@ export default async function PainelPage() {
 
   if (!tenant) redirect('/login')
 
-  const trialAcabou =
-    !tenant.is_subscribed &&
-    new Date(tenant.trial_started_at).getTime() <= Date.now() - 30 * 24 * 60 * 60 * 1000
+  const diasDesdeInicio = Math.max(
+    0,
+    Math.floor((Date.now() - new Date(tenant.trial_started_at).getTime()) / (24 * 60 * 60 * 1000))
+  )
+  const diasRestantes = Math.max(0, 30 - diasDesdeInicio)
+  const trialAcabou = !tenant.is_subscribed && diasDesdeInicio >= 30
 
   const { data: items } = await supabase
     .from('items')
@@ -44,29 +47,18 @@ export default async function PainelPage() {
     .order('created_at', { ascending: false })
 
   return (
-    <div className="min-h-screen p-4 sm:p-8 bg-slate-50">
-      {trialAcabou && (
-        <div className="max-w-md mx-auto mb-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-3 text-center">
-          <p>Seu período grátis acabou. Seu catálogo está fora do ar pros clientes até você assinar.</p>
-          <p className="mt-1 text-xs">
-            Se não assinar logo, seus dados (fotos e cardápio) serão apagados. Se quiser voltar depois,
-            vai precisar montar o catálogo de novo.
-          </p>
-          <a
-            href={linkCheckoutKiwify(tenant.id)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-2 px-4 py-2 rounded-lg bg-amber-600 text-white text-xs font-semibold"
-          >
-            Assinar agora — R$ 19,90/mês
-          </a>
-        </div>
-      )}
-      <PainelClient tenant={tenant} itemsIniciais={items ?? []} />
+    <>
+      <PainelClient
+        tenant={tenant}
+        itemsIniciais={items ?? []}
+        diasRestantes={diasRestantes}
+        trialAcabou={trialAcabou}
+        linkCheckout={linkCheckoutKiwify(tenant.id)}
+      />
       <ChatSuporte linkWhatsappSuporte={montarLinkWhatsappSuporte(tenant.name)} />
       <Suspense fallback={null}>
         <PopupAssinaturaAtiva />
       </Suspense>
-    </div>
+    </>
   )
 }
