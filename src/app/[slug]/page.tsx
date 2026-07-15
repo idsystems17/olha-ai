@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import { corDeFundo } from '@/lib/paleta'
 import { linkPublico } from '@/lib/link-publico'
 import { CompartilharBotao } from '@/components/CompartilharBotao'
+import { CatalogoItens } from '@/components/CatalogoItens'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
@@ -17,13 +18,12 @@ type Item = {
   is_available_today: boolean
 }
 
-function formatarPreco(valor: number): string {
-  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-}
-
-function linkWhatsappItem(whatsapp: string, nomeNegocio: string, nomeItem: string): string {
-  const mensagem = encodeURIComponent(`Oi! Vi seu catálogo no Olha Aí e quero pedir: ${nomeItem}`)
-  return `https://wa.me/${whatsapp}?text=${mensagem}`
+function formatarWhatsappExibicao(digitos: string): string {
+  const ddd = digitos.slice(0, 2)
+  const resto = digitos.slice(2)
+  const meio = resto.length === 9 ? resto.slice(0, 5) : resto.slice(0, 4)
+  const fim = resto.length === 9 ? resto.slice(5) : resto.slice(4)
+  return `(${ddd}) ${meio}-${fim}`
 }
 
 async function buscarDados(slug: string) {
@@ -67,87 +67,70 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
   if (!dados) notFound()
 
   const { tenant, items } = dados
+  const fundo = corDeFundo(tenant.cor_principal, tenant.cor_secundaria)
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <header
-        className="text-white px-6 pt-10 pb-8 text-center"
-        style={{ background: corDeFundo(tenant.cor_principal, tenant.cor_secundaria) }}
-      >
-        {tenant.logo_url ? (
-          // eslint-disable-next-line @next/next/no-img-element -- foto vem do Supabase Storage
-          <img
-            src={tenant.logo_url}
-            alt={tenant.name}
-            className="w-24 h-24 rounded-full object-cover mx-auto border-4 border-white/40 shadow-lg"
-          />
-        ) : (
-          <div className="w-24 h-24 rounded-full mx-auto border-4 border-white/40 shadow-lg bg-white/20 flex items-center justify-center text-3xl font-bold">
-            {tenant.name.charAt(0).toUpperCase()}
-          </div>
-        )}
-        <h1 className="text-2xl font-bold mt-4">{tenant.name}</h1>
-        {tenant.bio && <p className="text-sm opacity-90 mt-1 max-w-sm mx-auto">{tenant.bio}</p>}
-
-        <div className="mt-4">
+      <div className="w-full pt-8 pb-16 px-4 relative" style={{ background: fundo }}>
+        <div className="absolute top-4 right-4">
           <CompartilharBotao
             url={linkPublico(tenant.slug)}
             titulo={tenant.name}
             texto={`Dá uma olhada no catálogo de ${tenant.name}!`}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 transition px-3 py-1.5 rounded-full"
+            className="bg-white/20 hover:bg-white/35 text-white backdrop-blur-sm p-2 rounded-full transition"
           >
-            Indicar pra alguém
+            <span className="sr-only">Compartilhar</span>
           </CompartilharBotao>
         </div>
-      </header>
+      </div>
 
-      <main className="flex-1 max-w-md w-full mx-auto px-4 py-6 space-y-3">
-        {items.length === 0 && (
-          <p className="text-center text-sm text-slate-400 py-10">
-            Ainda não tem itens no catálogo.
-          </p>
-        )}
-
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className={`flex items-center gap-3 rounded-xl border border-slate-200 p-3 bg-white ${
-              item.is_available_today ? '' : 'opacity-50'
-            }`}
-          >
-            {item.image_url ? (
-              // eslint-disable-next-line @next/next/no-img-element -- foto vem do Supabase Storage
-              <img src={item.image_url} alt={item.name} className="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
-            ) : (
-              <div className="w-16 h-16 rounded-lg bg-slate-100 flex-shrink-0" />
-            )}
-
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-slate-800">{item.name}</p>
-              <p className="text-sm text-slate-500">{formatarPreco(item.price)}</p>
-              {item.description && (
-                <p className="text-xs text-slate-400 mt-0.5 line-clamp-2">{item.description}</p>
-              )}
-              {!item.is_available_today && (
-                <span className="inline-block mt-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
-                  Não tem hoje
-                </span>
-              )}
+      <div className="px-4 -mt-10 mb-4 relative z-10 max-w-md w-full mx-auto">
+        <div className="bg-white rounded-2xl p-4 shadow-md border border-slate-100 flex flex-col items-center text-center">
+          {tenant.logo_url ? (
+            // eslint-disable-next-line @next/next/no-img-element -- foto vem do Supabase Storage
+            <img
+              src={tenant.logo_url}
+              alt={tenant.name}
+              className="w-20 h-20 rounded-full object-cover -mt-12 border-4 border-white shadow-md bg-white"
+            />
+          ) : (
+            <div
+              className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-2xl -mt-12 border-4 border-white shadow-md"
+              style={{ background: fundo }}
+            >
+              {tenant.name.charAt(0).toUpperCase()}
             </div>
+          )}
 
-            {item.is_available_today && (
-              <a
-                href={linkWhatsappItem(tenant.whatsapp, tenant.name, item.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-shrink-0 text-xs font-semibold text-white px-3 py-2 rounded-lg bg-green-600 hover:bg-green-700 transition"
-              >
-                Pedir
-              </a>
-            )}
+          <h1 className="font-bold text-slate-800 text-lg mt-2 leading-tight">{tenant.name}</h1>
+          {tenant.bio && <p className="text-slate-500 text-xs mt-1 leading-relaxed px-2">{tenant.bio}</p>}
+
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-slate-50 w-full justify-center text-[11px] text-slate-400 flex-wrap">
+            <span>
+              Status: <span className="text-emerald-500 font-bold">● Aberto</span>
+            </span>
+            <span>•</span>
+            <span>
+              WhatsApp: <span className="text-slate-600 font-semibold">{formatarWhatsappExibicao(tenant.whatsapp)}</span>
+            </span>
           </div>
-        ))}
+        </div>
+      </div>
+
+      <main className="flex-1 max-w-md w-full mx-auto px-4">
+        <CatalogoItens items={items} whatsapp={tenant.whatsapp} />
       </main>
+
+      <div className="px-4 py-6 mt-4 max-w-md w-full mx-auto">
+        <CompartilharBotao
+          url={linkPublico(tenant.slug)}
+          titulo={tenant.name}
+          texto={`Dá uma olhada no catálogo de ${tenant.name}!`}
+          className="w-full border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-xs transition"
+        >
+          Indicar esse catálogo pra alguém
+        </CompartilharBotao>
+      </div>
 
       <footer className="py-6 text-center">
         <Link href="/" className={`${dancingScript.className} text-lg text-slate-300 hover:text-slate-400 transition`}>
