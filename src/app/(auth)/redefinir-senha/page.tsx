@@ -56,7 +56,7 @@ function RedefinirSenhaContent() {
     }
   }
 
-  const cardBase = 'min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 via-white to-rose-50'
+  const cardBase = 'min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-200 via-orange-50 to-rose-200'
 
   if (erroParam === 'link-invalido' || sessaoValida === false) {
     return (

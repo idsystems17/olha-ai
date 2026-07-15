@@ -35,7 +35,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 via-white to-rose-50">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-200 via-orange-50 to-rose-200">
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-slate-800">Olha Aí</h1>

@@ -78,7 +78,7 @@ export default function LandingPage() {
               src="/preview-catalogo.png"
               alt="Exemplo de catálogo no Olha Aí, com fotos, preços e botão de pedido pelo WhatsApp"
               width={840}
-              height={1326}
+              height={1340}
               className="w-full h-auto"
               priority
             />
