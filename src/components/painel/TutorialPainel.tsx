@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, ArrowDown } from 'lucide-react'
 import { PASSOS_TUTORIAL_PAINEL, chaveTutorialVisto } from '@/lib/tutorial-painel'
 
 const TOQUE_MINIMO_SWIPE = 40
@@ -65,10 +65,28 @@ export function TutorialPainel({ slug, corPrincipal, onFechar }: { slug: string;
         onTouchEnd={aoTocarFim}
       >
         <div
-          className="relative w-full max-w-[200px] flex-1 min-h-[180px] rounded-2xl overflow-hidden border-4 shadow-lg"
+          className="relative w-full max-w-[180px] flex-shrink-0 rounded-2xl overflow-hidden border-4 shadow-lg"
           style={{ borderColor: `${corPrincipal}33` }}
         >
-          <Image src={passo.imagem} alt={passo.titulo} fill sizes="200px" className="object-cover object-top" />
+          <Image
+            src={passo.imagem}
+            alt={passo.titulo}
+            width={738}
+            height={1600}
+            className="w-full h-auto block"
+          />
+          {passo.alvo && (
+            <div
+              className="absolute animate-bounce"
+              style={{ left: `${passo.alvo.x}%`, top: `${passo.alvo.y}%`, transform: 'translate(-50%, -100%)' }}
+            >
+              <ArrowDown
+                size={26}
+                strokeWidth={3.5}
+                className="text-amber-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]"
+              />
+            </div>
+          )}
         </div>
         <div className="space-y-2 max-w-xs flex-shrink-0">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
