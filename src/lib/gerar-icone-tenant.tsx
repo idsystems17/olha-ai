@@ -26,6 +26,7 @@ export function gerarIconeTenant(tenant: TenantParaIcone, tamanho: number) {
           {/* eslint-disable-next-line @next/next/no-img-element -- dentro do ImageResponse (satori), não é JSX de página normal */}
           <img
             src={tenant.logo_url}
+            alt=""
             width={tamanho}
             height={tamanho}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}

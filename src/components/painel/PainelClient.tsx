@@ -29,6 +29,7 @@ type Tenant = {
   cor_secundaria: string | null
   is_subscribed: boolean
   is_open: boolean
+  whatsapp: string
 }
 
 const ABAS = [
@@ -44,12 +45,14 @@ export function PainelClient({
   diasRestantes,
   trialAcabou,
   linkCheckout,
+  email,
 }: {
   tenant: Tenant
   itemsIniciais: Item[]
   diasRestantes: number
   trialAcabou: boolean
   linkCheckout: string
+  email: string
 }) {
   const [aba, setAba] = useState<'cardapio' | 'aparencia' | 'meulink' | 'conta'>('cardapio')
   const fundo = corDeFundo(tenant.cor_principal, tenant.cor_secundaria)
@@ -96,7 +99,7 @@ export function PainelClient({
               corSecundaria={tenant.cor_secundaria}
             />
           )}
-          {aba === 'conta' && <AbaConta />}
+          {aba === 'conta' && <AbaConta whatsapp={tenant.whatsapp} email={email} />}
         </div>
       </div>
 

@@ -7,11 +7,11 @@ import { Check } from 'lucide-react'
 export function PopupAssinaturaAtiva() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [aberto, setAberto] = useState(false)
+  const [fechado, setFechado] = useState(false)
+  const aberto = !fechado && searchParams.get('assinatura') === 'ativada'
 
   useEffect(() => {
     if (searchParams.get('assinatura') === 'ativada') {
-      setAberto(true)
       router.replace('/painel')
     }
   }, [searchParams, router])
@@ -29,7 +29,7 @@ export function PopupAssinaturaAtiva() {
           Seu catálogo continua no ar pros seus clientes. Obrigada por assinar o Olha Aí.
         </p>
         <button
-          onClick={() => setAberto(false)}
+          onClick={() => setFechado(true)}
           className="mt-5 w-full py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold"
         >
           Fechar

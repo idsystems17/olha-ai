@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic'
 
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 
@@ -66,9 +67,9 @@ function RedefinirSenhaContent() {
           <p className="text-sm text-rose-600 bg-rose-50 rounded-xl p-3 mt-4">
             Este link é inválido ou já expirou.
           </p>
-          <a href="/esqueci-senha" className="inline-flex mt-5 bg-orange-500 text-white rounded-full px-6 py-3 text-sm font-medium">
+          <Link href="/esqueci-senha" className="inline-flex mt-5 bg-orange-500 text-white rounded-full px-6 py-3 text-sm font-medium">
             Solicitar novo link
-          </a>
+          </Link>
         </div>
       </div>
     )

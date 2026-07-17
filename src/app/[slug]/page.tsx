@@ -4,6 +4,7 @@ import { Dancing_Script } from 'next/font/google'
 import { createClient } from '@/lib/supabase/server'
 import { corDeFundo } from '@/lib/paleta'
 import { linkPublico } from '@/lib/link-publico'
+import { formatarWhatsappVisual } from '@/lib/whatsapp'
 import { CompartilharBotao } from '@/components/CompartilharBotao'
 import { CatalogoItens } from '@/components/CatalogoItens'
 
@@ -20,14 +21,6 @@ type Item = {
   description: string | null
   image_url: string | null
   is_available_today: boolean
-}
-
-function formatarWhatsappExibicao(digitos: string): string {
-  const ddd = digitos.slice(0, 2)
-  const resto = digitos.slice(2)
-  const meio = resto.length === 9 ? resto.slice(0, 5) : resto.slice(0, 4)
-  const fim = resto.length === 9 ? resto.slice(5) : resto.slice(4)
-  return `(${ddd}) ${meio}-${fim}`
 }
 
 async function buscarDados(slug: string) {
@@ -120,7 +113,7 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
             </span>
             <span>•</span>
             <span>
-              WhatsApp: <span className="text-slate-600 font-semibold">{formatarWhatsappExibicao(tenant.whatsapp)}</span>
+              WhatsApp: <span className="text-slate-600 font-semibold">{formatarWhatsappVisual(tenant.whatsapp)}</span>
             </span>
           </div>
         </div>

@@ -3,10 +3,7 @@ import type { NextRequest } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { slugify, SLUGS_RESERVADOS } from '@/lib/slug'
 import { normalizarCpf, hashCpf } from '@/lib/cpf'
-
-function normalizarWhatsapp(whatsapp: string): string {
-  return whatsapp.replace(/\D/g, '')
-}
+import { normalizarWhatsapp } from '@/lib/whatsapp'
 
 export async function POST(request: NextRequest) {
   let body: { nomeNegocio?: string; whatsapp?: string; cpf?: string; email?: string; senha?: string }

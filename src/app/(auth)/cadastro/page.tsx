@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Loader2 } from 'lucide-react'
+import { formatarWhatsappVisual } from '@/lib/whatsapp'
 
 function formatarCpf(valor: string): string {
   const digitos = valor.replace(/\D/g, '').slice(0, 11)
@@ -14,14 +15,6 @@ function formatarCpf(valor: string): string {
     .replace(/(\d{3})(\d)/, '$1.$2')
     .replace(/(\d{3})(\d)/, '$1.$2')
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
-}
-
-function formatarWhatsapp(valor: string): string {
-  const digitos = valor.replace(/\D/g, '').slice(0, 11)
-  if (digitos.length <= 10) {
-    return digitos.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3').trim().replace(/-$/, '')
-  }
-  return digitos.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3').trim().replace(/-$/, '')
 }
 
 export default function CadastroPage() {
@@ -91,7 +84,7 @@ export default function CadastroPage() {
             type="tel"
             placeholder="WhatsApp com DDD"
             value={whatsapp}
-            onChange={(e) => setWhatsapp(formatarWhatsapp(e.target.value))}
+            onChange={(e) => setWhatsapp(formatarWhatsappVisual(e.target.value))}
             required
             className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
           />

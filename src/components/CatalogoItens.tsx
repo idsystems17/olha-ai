@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { MessageSquare, Search, ShoppingBag } from 'lucide-react'
+import { linkWhatsapp } from '@/lib/whatsapp'
 
 type Item = {
   id: string
@@ -17,8 +18,7 @@ function formatarPreco(valor: number): string {
 }
 
 function linkWhatsappItem(whatsapp: string, nomeItem: string): string {
-  const mensagem = encodeURIComponent(`Oi! Vi seu catálogo no Olha Aí e quero pedir: ${nomeItem}`)
-  return `https://wa.me/${whatsapp}?text=${mensagem}`
+  return linkWhatsapp(whatsapp, `Oi! Vi seu catálogo no Olha Aí e quero pedir: ${nomeItem}`)
 }
 
 export function CatalogoItens({
