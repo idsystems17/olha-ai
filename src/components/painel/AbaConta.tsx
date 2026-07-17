@@ -63,7 +63,7 @@ export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string 
         setMensagemEmail('❌ Não foi possível trocar o e-mail. Tente de novo.')
         return
       }
-      setMensagemEmail('✅ E-mail atualizado! Se pedir confirmação, ela chega na caixa de entrada.')
+      setMensagemEmail('📩 Te mandamos um link de confirmação. O e-mail só troca depois que você clicar nele.')
     } catch {
       setMensagemEmail('❌ Não foi possível trocar o e-mail. Tente de novo.')
     } finally {
