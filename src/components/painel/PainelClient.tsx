@@ -115,9 +115,9 @@ export function PainelClient({
 
           <button
             onClick={() => setTutorialAbertoManual(true)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-slate-600 mb-4 transition"
+            className="w-full flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 py-2.5 text-sm font-semibold text-slate-700 mb-4 transition"
           >
-            <PlayCircle size={14} />
+            <PlayCircle size={16} className="text-slate-500" />
             Como usar o painel
           </button>
 
