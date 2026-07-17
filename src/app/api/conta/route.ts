@@ -65,6 +65,22 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: 'Confirme sua senha pra excluir a conta.' }, { status: 400 })
   }
 
+  // Não deixa excluir com assinatura ativa — a Kiwify não expõe cancelamento
+  // via API, então a cobrança continuaria rodando sem a gente conseguir
+  // parar. A pessoa precisa cancelar lá primeiro (ver AbaConta.tsx).
+  const { data: tenantAtual } = await supabase
+    .from('tenants')
+    .select('is_subscribed')
+    .eq('user_id', user.id)
+    .single()
+
+  if (tenantAtual?.is_subscribed) {
+    return NextResponse.json(
+      { error: 'Cancele sua assinatura na Kiwify antes de excluir a conta.' },
+      { status: 409 }
+    )
+  }
+
   // Reconfirma a senha antes de excluir — ação irreversível, mesmo padrão
   // de segurança usado na troca de senha (não confia só na checagem do
   // cliente, já que essa rota pode ser chamada direto).

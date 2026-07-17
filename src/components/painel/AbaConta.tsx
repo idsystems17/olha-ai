@@ -5,7 +5,17 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { formatarWhatsappVisual } from '@/lib/whatsapp'
 
-export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string }) {
+const LINK_ASSINATURAS_KIWIFY = 'https://dashboard.kiwify.com.br/minhas-compras'
+
+export function AbaConta({
+  whatsapp,
+  email,
+  isSubscribed,
+}: {
+  whatsapp: string
+  email: string
+  isSubscribed: boolean
+}) {
   const router = useRouter()
   const [novoWhatsapp, setNovoWhatsapp] = useState(formatarWhatsappVisual(whatsapp))
   const [salvandoWhatsapp, setSalvandoWhatsapp] = useState(false)
@@ -23,6 +33,7 @@ export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string 
   const [saindo, setSaindo] = useState(false)
 
   const [mostrarExclusao, setMostrarExclusao] = useState(false)
+  const [avisoKiwify, setAvisoKiwify] = useState(false)
   const [senhaExclusao, setSenhaExclusao] = useState('')
   const [excluindo, setExcluindo] = useState(false)
   const [mensagemExclusao, setMensagemExclusao] = useState('')
@@ -266,10 +277,33 @@ export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string 
       </form>
 
       <div className="pt-5 border-t border-slate-100">
-        {!mostrarExclusao ? (
+        {avisoKiwify ? (
+          <div className="space-y-3">
+            <p className="text-xs text-rose-600">
+              Sua assinatura na Kiwify ainda está ativa. Excluir sua conta aqui{' '}
+              <strong>não cancela a cobrança lá</strong> — você continuaria sendo cobrada todo
+              mês mesmo sem o catálogo. Cancele primeiro na Kiwify, depois volte aqui pra excluir.
+            </p>
+            <a
+              href={LINK_ASSINATURAS_KIWIFY}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold"
+            >
+              Cancelar assinatura na Kiwify
+            </a>
+            <button
+              type="button"
+              onClick={() => setAvisoKiwify(false)}
+              className="w-full py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold"
+            >
+              Voltar
+            </button>
+          </div>
+        ) : !mostrarExclusao ? (
           <button
             type="button"
-            onClick={() => setMostrarExclusao(true)}
+            onClick={() => (isSubscribed ? setAvisoKiwify(true) : setMostrarExclusao(true))}
             className="w-full py-2.5 rounded-lg border border-rose-200 text-rose-600 text-sm font-semibold"
           >
             Excluir minha conta

@@ -99,7 +99,9 @@ export function PainelClient({
               corSecundaria={tenant.cor_secundaria}
             />
           )}
-          {aba === 'conta' && <AbaConta whatsapp={tenant.whatsapp} email={email} />}
+          {aba === 'conta' && (
+            <AbaConta whatsapp={tenant.whatsapp} email={email} isSubscribed={tenant.is_subscribed} />
+          )}
         </div>
       </div>
 
