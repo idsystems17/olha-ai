@@ -1,17 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { ClipboardList, ToggleRight, Palette, QrCode, Share2, Power, X, ChevronLeft, ChevronRight } from 'lucide-react'
-import { PASSOS_TUTORIAL_PAINEL, chaveTutorialVisto, type IconePasso } from '@/lib/tutorial-painel'
-
-const ICONES: Record<IconePasso, typeof ClipboardList> = {
-  cardapio: ClipboardList,
-  disponibilidade: ToggleRight,
-  aparencia: Palette,
-  link: QrCode,
-  compartilhar: Share2,
-  loja: Power,
-}
+import Image from 'next/image'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { PASSOS_TUTORIAL_PAINEL, chaveTutorialVisto } from '@/lib/tutorial-painel'
 
 const TOQUE_MINIMO_SWIPE = 40
 
@@ -20,7 +12,6 @@ export function TutorialPainel({ slug, corPrincipal, onFechar }: { slug: string;
   const [toqueInicioX, setToqueInicioX] = useState<number | null>(null)
 
   const passo = PASSOS_TUTORIAL_PAINEL[passoAtual]
-  const Icone = ICONES[passo.icone]
   const ultimoPasso = passoAtual === PASSOS_TUTORIAL_PAINEL.length - 1
 
   function fechar() {
@@ -69,17 +60,17 @@ export function TutorialPainel({ slug, corPrincipal, onFechar }: { slug: string;
       </div>
 
       <div
-        className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-5"
+        className="flex-1 min-h-0 flex flex-col items-center justify-center px-8 text-center gap-4 overflow-y-auto py-4"
         onTouchStart={(e) => setToqueInicioX(e.touches[0].clientX)}
         onTouchEnd={aoTocarFim}
       >
         <div
-          className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: `${corPrincipal}1a` }}
+          className="relative w-full max-w-[200px] flex-1 min-h-[180px] rounded-2xl overflow-hidden border-4 shadow-lg"
+          style={{ borderColor: `${corPrincipal}33` }}
         >
-          <Icone size={36} style={{ color: corPrincipal }} />
+          <Image src={passo.imagem} alt={passo.titulo} fill sizes="200px" className="object-cover object-top" />
         </div>
-        <div className="space-y-2 max-w-xs">
+        <div className="space-y-2 max-w-xs flex-shrink-0">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Passo {passo.numero} de {PASSOS_TUTORIAL_PAINEL.length}
           </p>
