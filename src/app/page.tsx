@@ -1,23 +1,28 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { ArrowDown } from 'lucide-react'
+import { PASSOS_TUTORIAL_PAINEL } from '@/lib/tutorial-painel'
 
-// Mesmos prints usados no tutorial de dentro do painel (src/lib/tutorial-painel.ts) —
-// texto aqui em tom de venda, não de instrução, mas a imagem é reaproveitada.
+// Mesmos prints (e mesmas coordenadas de seta) do tutorial de dentro do painel
+// (src/lib/tutorial-painel.ts) — texto aqui em tom de venda, não de instrução.
 const COMO_FUNCIONA = [
   {
     imagem: '/tutorial/cardapio.jpg',
     titulo: 'Monte seu cardápio',
     texto: 'Foto, nome e preço de cada produto. Marca o que tem hoje em dois toques.',
+    alvo: PASSOS_TUTORIAL_PAINEL[0].alvo,
   },
   {
     imagem: '/tutorial/aparencia.jpg',
     titulo: 'Deixe com a sua cara',
     texto: 'Escolha as cores do seu negócio e veja o catálogo ganhar vida na hora.',
+    alvo: PASSOS_TUTORIAL_PAINEL[2].alvo,
   },
   {
     imagem: '/tutorial/meu-link.jpg',
     titulo: 'Compartilhe seu link',
     texto: 'QR code, WhatsApp, Instagram — o cliente clica e já cai no seu WhatsApp.',
+    alvo: PASSOS_TUTORIAL_PAINEL[4].alvo,
   },
 ] as const
 
@@ -59,10 +64,22 @@ export default function LandingPage() {
             Por dentro do painel
           </h2>
           <div className="grid sm:grid-cols-3 gap-6">
-            {COMO_FUNCIONA.map(({ imagem, titulo, texto }) => (
+            {COMO_FUNCIONA.map(({ imagem, titulo, texto, alvo }) => (
               <div key={titulo} className="text-center">
-                <div className="max-w-[160px] mx-auto rounded-2xl border-4 border-white shadow-lg overflow-hidden mb-4">
+                <div className="relative max-w-[160px] mx-auto rounded-2xl border-4 border-white shadow-lg overflow-hidden mb-4">
                   <Image src={imagem} alt={titulo} width={738} height={1600} className="w-full h-auto" />
+                  {alvo && (
+                    <div
+                      className="absolute animate-bounce"
+                      style={{ left: `${alvo.x}%`, top: `${alvo.y}%`, transform: 'translate(-50%, -100%)' }}
+                    >
+                      <ArrowDown
+                        size={22}
+                        strokeWidth={3.5}
+                        className="text-amber-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]"
+                      />
+                    </div>
+                  )}
                 </div>
                 <h3 className="font-semibold text-slate-800 text-sm">{titulo}</h3>
                 <p className="mt-1.5 text-sm text-slate-500">{texto}</p>

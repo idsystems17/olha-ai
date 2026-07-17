@@ -20,7 +20,8 @@ export const PASSOS_TUTORIAL_PAINEL: PassoTutorial[] = [
     numero: 2,
     titulo: 'Diga o que tem hoje',
     descricao: 'Use o interruptor ao lado de cada item pra avisar o que está disponível agora.',
-    imagem: '/tutorial/cardapio.jpg',
+    imagem: '/tutorial/cardapio-item.jpg',
+    alvo: { x: 60, y: 65.5 },
   },
   {
     numero: 3,
