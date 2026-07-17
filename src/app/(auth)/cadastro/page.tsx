@@ -132,6 +132,15 @@ export default function CadastroPage() {
           Já tem conta?{' '}
           <Link href="/login" className="text-orange-600 font-semibold">Entrar</Link>
         </p>
+
+        <p className="text-center mt-3 text-[11px] text-slate-400">
+          Ao criar sua conta, você concorda com os{' '}
+          <Link href="/termos-de-uso" className="text-slate-500 underline">Termos de Uso</Link>
+          {' '}e a{' '}
+          <Link href="/politica-de-privacidade" className="text-slate-500 underline">
+            Política de Privacidade
+          </Link>.
+        </p>
       </div>
     </div>
   )

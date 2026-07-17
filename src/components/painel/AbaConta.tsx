@@ -22,6 +22,11 @@ export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string 
   const [mensagem, setMensagem] = useState('')
   const [saindo, setSaindo] = useState(false)
 
+  const [mostrarExclusao, setMostrarExclusao] = useState(false)
+  const [senhaExclusao, setSenhaExclusao] = useState('')
+  const [excluindo, setExcluindo] = useState(false)
+  const [mensagemExclusao, setMensagemExclusao] = useState('')
+
   async function salvarWhatsapp(e: React.FormEvent) {
     e.preventDefault()
     setMensagemWhatsapp('')
@@ -77,6 +82,32 @@ export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string 
     await supabase.auth.signOut()
     router.push('/login')
     router.refresh()
+  }
+
+  async function excluirConta(e: React.FormEvent) {
+    e.preventDefault()
+    setMensagemExclusao('')
+    setExcluindo(true)
+    try {
+      const resposta = await fetch('/api/conta', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ senha: senhaExclusao }),
+      })
+      const dados = await resposta.json()
+      if (!resposta.ok) {
+        setMensagemExclusao(`❌ ${dados.error ?? 'Erro ao excluir.'}`)
+        return
+      }
+      const supabase = createClient()
+      await supabase.auth.signOut()
+      router.push('/login')
+      router.refresh()
+    } catch {
+      setMensagemExclusao('❌ Não foi possível excluir. Tente de novo.')
+    } finally {
+      setExcluindo(false)
+    }
   }
 
   async function trocarSenha(e: React.FormEvent) {
@@ -233,6 +264,51 @@ export function AbaConta({ whatsapp, email }: { whatsapp: string; email: string 
           </button>
         </div>
       </form>
+
+      <div className="pt-5 border-t border-slate-100">
+        {!mostrarExclusao ? (
+          <button
+            type="button"
+            onClick={() => setMostrarExclusao(true)}
+            className="w-full py-2.5 rounded-lg border border-rose-200 text-rose-600 text-sm font-semibold"
+          >
+            Excluir minha conta
+          </button>
+        ) : (
+          <form onSubmit={excluirConta} className="space-y-3">
+            <p className="text-xs text-rose-600">
+              Isso apaga sua conta, seu catálogo e todos os produtos de vez — não dá pra desfazer.
+              Confirme sua senha pra continuar.
+            </p>
+            <input
+              type="password"
+              value={senhaExclusao}
+              onChange={(e) => setSenhaExclusao(e.target.value)}
+              placeholder="Sua senha"
+              required
+              autoComplete="current-password"
+              className="w-full text-sm px-3 py-2 rounded-lg border border-rose-200 outline-none focus:border-rose-400"
+            />
+            {mensagemExclusao && <p className="text-sm">{mensagemExclusao}</p>}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => { setMostrarExclusao(false); setSenhaExclusao(''); setMensagemExclusao('') }}
+                className="flex-1 py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={excluindo}
+                className="flex-1 py-2.5 rounded-lg bg-rose-600 text-white text-sm font-semibold disabled:opacity-50"
+              >
+                {excluindo ? 'Excluindo...' : 'Excluir de vez'}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   )
 }
