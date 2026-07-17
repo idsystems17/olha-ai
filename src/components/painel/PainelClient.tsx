@@ -1,15 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import { Layers, Palette, QrCode, UserCircle, Eye } from 'lucide-react'
+import { useState, useSyncExternalStore } from 'react'
+import { Layers, Palette, QrCode, UserCircle, Eye, PlayCircle } from 'lucide-react'
 import { corDeFundo } from '@/lib/paleta'
 import { linkPublico } from '@/lib/link-publico'
+import { chaveTutorialVisto } from '@/lib/tutorial-painel'
 import { AbaCardapio } from './AbaCardapio'
 import { AbaAparencia } from './AbaAparencia'
 import { AbaMeuLink } from './AbaMeuLink'
 import { AbaConta } from './AbaConta'
 import { InterruptorLoja } from './InterruptorLoja'
 import { CartaoAssinatura } from './CartaoAssinatura'
+import { TutorialPainel } from './TutorialPainel'
 
 type Item = {
   id: string
@@ -39,6 +41,21 @@ const ABAS = [
   { id: 'conta' as const, label: 'Conta', icone: UserCircle },
 ]
 
+function inscreverStorage(callback: () => void) {
+  window.addEventListener('storage', callback)
+  return () => window.removeEventListener('storage', callback)
+}
+
+// Sincroniza com o localStorage (sistema externo ao React) via useSyncExternalStore,
+// em vez de useEffect + setState, pra não disparar uma renderização em cascata logo após montar.
+function usePrimeiroAcesso(slug: string): boolean {
+  return useSyncExternalStore(
+    inscreverStorage,
+    () => localStorage.getItem(chaveTutorialVisto(slug)) === null,
+    () => false,
+  )
+}
+
 export function PainelClient({
   tenant,
   itemsIniciais,
@@ -55,7 +72,17 @@ export function PainelClient({
   email: string
 }) {
   const [aba, setAba] = useState<'cardapio' | 'aparencia' | 'meulink' | 'conta'>('cardapio')
+  const [tutorialAbertoManual, setTutorialAbertoManual] = useState(false)
+  const [tutorialFechadoAgora, setTutorialFechadoAgora] = useState(false)
   const fundo = corDeFundo(tenant.cor_principal, tenant.cor_secundaria)
+
+  const primeiroAcesso = usePrimeiroAcesso(tenant.slug)
+  const tutorialAberto = tutorialAbertoManual || (primeiroAcesso && !tutorialFechadoAgora)
+
+  function fecharTutorial() {
+    setTutorialAbertoManual(false)
+    setTutorialFechadoAgora(true)
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 pb-20 flex flex-col">
@@ -84,7 +111,15 @@ export function PainelClient({
         />
 
         <div className="bg-white rounded-2xl shadow p-5">
-          <p className="text-xs text-slate-400 mb-4 truncate">{linkPublico(tenant.slug).replace(/^https?:\/\//, '')}</p>
+          <p className="text-xs text-slate-400 mb-1 truncate">{linkPublico(tenant.slug).replace(/^https?:\/\//, '')}</p>
+
+          <button
+            onClick={() => setTutorialAbertoManual(true)}
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-slate-600 mb-4 transition"
+          >
+            <PlayCircle size={14} />
+            Como usar o painel
+          </button>
 
           <InterruptorLoja isOpenInicial={tenant.is_open} />
 
@@ -120,6 +155,10 @@ export function PainelClient({
           </button>
         ))}
       </nav>
+
+      {tutorialAberto && (
+        <TutorialPainel slug={tenant.slug} corPrincipal={tenant.cor_principal} onFechar={fecharTutorial} />
+      )}
     </div>
   )
 }
