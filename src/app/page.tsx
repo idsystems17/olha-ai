@@ -1,22 +1,23 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MessageCircleHeart, ImagePlus, QrCode } from 'lucide-react'
 
-const PASSOS = [
+// Mesmos prints usados no tutorial de dentro do painel (src/lib/tutorial-painel.ts) —
+// texto aqui em tom de venda, não de instrução, mas a imagem é reaproveitada.
+const COMO_FUNCIONA = [
   {
-    icone: MessageCircleHeart,
-    titulo: 'Cria sua conta',
-    texto: 'Nome do negócio, WhatsApp e pronto. Seu catálogo já nasce com um link só seu.',
+    imagem: '/tutorial/cardapio.jpg',
+    titulo: 'Monte seu cardápio',
+    texto: 'Foto, nome e preço de cada produto. Marca o que tem hoje em dois toques.',
   },
   {
-    icone: ImagePlus,
-    titulo: 'Monta seu cardápio',
-    texto: 'Foto, nome e preço de cada coisa que você vende. Marca o que tem hoje em dois toques.',
+    imagem: '/tutorial/aparencia.jpg',
+    titulo: 'Deixe com a sua cara',
+    texto: 'Escolha as cores do seu negócio e veja o catálogo ganhar vida na hora.',
   },
   {
-    icone: QrCode,
-    titulo: 'Manda pros clientes',
-    texto: 'Compartilha o link ou o QR code. Quem quiser pedir, clica e cai direto no seu WhatsApp.',
+    imagem: '/tutorial/meu-link.jpg',
+    titulo: 'Compartilhe seu link',
+    texto: 'QR code, WhatsApp, Instagram — o cliente clica e já cai no seu WhatsApp.',
   },
 ] as const
 
@@ -54,13 +55,16 @@ export default function LandingPage() {
         </section>
 
         <section className="max-w-4xl mx-auto px-6 pb-16">
-          <div className="grid sm:grid-cols-3 gap-5">
-            {PASSOS.map(({ icone: Icone, titulo, texto }) => (
-              <div key={titulo} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 text-center">
-                <div className="w-11 h-11 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-3">
-                  <Icone size={20} />
+          <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-6">
+            Por dentro do painel
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {COMO_FUNCIONA.map(({ imagem, titulo, texto }) => (
+              <div key={titulo} className="text-center">
+                <div className="max-w-[160px] mx-auto rounded-2xl border-4 border-white shadow-lg overflow-hidden mb-4">
+                  <Image src={imagem} alt={titulo} width={738} height={1600} className="w-full h-auto" />
                 </div>
-                <h2 className="font-semibold text-slate-800 text-sm">{titulo}</h2>
+                <h3 className="font-semibold text-slate-800 text-sm">{titulo}</h3>
                 <p className="mt-1.5 text-sm text-slate-500">{texto}</p>
               </div>
             ))}
