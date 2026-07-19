@@ -88,7 +88,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Print real de um catálogo de demonstração (Bolos da Ana) — trocar
+        {/* Print de um catálogo de demonstração (Bolos da Nina) — trocar
             por um catálogo real assim que a Izis tiver o primeiro cliente. */}
         <section className="max-w-4xl mx-auto px-6 pb-20">
           <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-6">
@@ -99,7 +99,7 @@ export default function LandingPage() {
               src="/preview-catalogo.png"
               alt="Exemplo de catálogo no Olha Aí, com fotos, preços e botão de pedido pelo WhatsApp"
               width={840}
-              height={1340}
+              height={835}
               className="w-full h-auto"
               priority
             />
