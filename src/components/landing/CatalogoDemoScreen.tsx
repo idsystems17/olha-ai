@@ -75,7 +75,7 @@ export function CatalogoDemoScreen({
       <main className="px-3 flex-1">
         {!lojaAberta && (
           <p className="text-center text-[10px] text-slate-500 bg-slate-100 border border-slate-200 rounded-xl py-2 px-3 mb-2.5">
-            A loja está fechada — dá pra ver o cardápio, mas não pra pedir agora.
+            A loja está fechada — dá pra ver a vitrine, mas não pra pedir agora.
           </p>
         )}
 

@@ -36,7 +36,7 @@ export default function OpengraphImage() {
           O
         </div>
         <div style={{ display: 'flex', fontSize: 64, fontWeight: 800, lineHeight: 1.1, maxWidth: 920 }}>
-          Seu cardápio bonito, no link do WhatsApp
+          Sua vitrine bonita, no link do WhatsApp
         </div>
         <div style={{ display: 'flex', fontSize: 30, marginTop: 28, opacity: 0.92, maxWidth: 820 }}>
           Foto, preço e um botão que já abre o pedido pronto — sem taxa por venda.

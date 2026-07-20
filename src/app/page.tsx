@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Dancing_Script } from 'next/font/google'
-import { ArrowRight, CheckCircle2, Smartphone, ShoppingBag, PlayCircle, Sparkles } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Smartphone, ShoppingBag, PlayCircle } from 'lucide-react'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
@@ -39,13 +39,8 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* HERO */}
         <section className="max-w-2xl mx-auto px-6 pt-8 pb-12 text-center">
-          <div className="inline-flex items-center gap-1.5 bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-xs font-semibold mb-5 border border-rose-100">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Pra autônomos e vendedores informais</span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
-            Seu cardápio bonito, no link do WhatsApp
+            Sua vitrine bonita, no link do WhatsApp
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
             Um catálogo simples pra mostrar o que você vende hoje — com foto, preço e um botão que já

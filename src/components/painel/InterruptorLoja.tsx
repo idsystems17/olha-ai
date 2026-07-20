@@ -30,7 +30,7 @@ export function InterruptorLoja({ isOpenInicial }: { isOpenInicial: boolean }) {
           {aberto ? 'Loja aberta' : 'Loja fechada'}
         </p>
         <p className="text-xs text-slate-400">
-          {aberto ? 'Clientes conseguem pedir normalmente.' : 'Cardápio visível, mas ninguém consegue pedir.'}
+          {aberto ? 'Clientes conseguem pedir normalmente.' : 'Vitrine visível, mas ninguém consegue pedir.'}
         </p>
       </div>
       <button

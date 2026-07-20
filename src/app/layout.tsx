@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
-const TITULO = "Olha Aí — seu catálogo no link do WhatsApp";
+const TITULO = "Olha Aí — sua vitrine no link do WhatsApp";
 const DESCRICAO =
   "Catálogo digital simples e prático pra quem vende pelo WhatsApp. Foto, preço e um botão que já leva pro pedido pronto — sem taxa por venda, sem aplicativo pra instalar.";
 
@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     "catálogo digital",
     "catálogo para WhatsApp",
     "cardápio digital",
+    "vitrine digital",
     "vender pelo WhatsApp",
     "loja online informal",
     "autônomo",
