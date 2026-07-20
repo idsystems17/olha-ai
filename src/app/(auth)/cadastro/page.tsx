@@ -72,9 +72,10 @@ export default function CadastroPage() {
 
         <form onSubmit={handleCadastro} className="space-y-3">
           <div>
+            <label className="text-xs font-semibold text-slate-600 block mb-1 px-1">Como quer ser chamada?</label>
             <input
               type="text"
-              placeholder="Seu nome (ex: Aparecida)"
+              placeholder="ex: Cida, Zé, Dona Maria..."
               value={nomeNegocio}
               onChange={(e) => setNomeNegocio(e.target.value)}
               required
@@ -82,8 +83,7 @@ export default function CadastroPage() {
               className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
             />
             <p className="text-[11px] text-slate-400 mt-1 px-1">
-              Pode ser seu nome ou como você gosta de ser chamada — ex: Aparecida, mas prefere &quot;Cida&quot;.
-              Dá pra trocar o nome do negócio depois, dentro do painel.
+              Usamos seu nome (não o do produto) porque seu link não muda mesmo se você trocar o que vende.
             </p>
           </div>
           <input
