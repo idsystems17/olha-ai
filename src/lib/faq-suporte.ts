@@ -22,7 +22,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     resposta: 'O cliente entra na sua página pelo link, escolhe o que quer e clica no botão que abre o WhatsApp já com uma mensagem pronta pra você.',
   },
   {
-    pergunta: 'Pra que serve o botão "tem hoje / não tem hoje" em cada item?',
+    pergunta: 'Pra que serve o botão "disponível / indisponível" em cada item?',
     resposta: 'É pra avisar rapidinho quando algo não está disponível no momento, sem precisar apagar o item do catálogo. Só clicar pra ligar ou desligar.',
   },
   {

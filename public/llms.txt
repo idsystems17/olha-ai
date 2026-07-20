@@ -1,0 +1,29 @@
+# Olha Aí
+
+> Catálogo digital pra quem vende pelo WhatsApp — autônomos e vendedores informais (doceiras, salgadeiras, prestadores de serviço) criam uma página com foto, preço e disponibilidade dos produtos, e o cliente pede com um clique que abre o WhatsApp com a mensagem pronta.
+
+Olha Aí é um produto real (SaaS), não um protótipo. Não tem carrinho de compra, frete ou checkout dentro do site — o pedido é sempre finalizado no WhatsApp da própria vendedora. Não cobra comissão por venda.
+
+## Como funciona
+
+- A vendedora cria uma conta em cerca de 1 minuto: nome do negócio, WhatsApp, CPF (regra anti-abuso: 1 teste grátis por CPF), e-mail e senha.
+- Ela monta o cardápio com foto, nome, preço e descrição de cada produto, e usa um interruptor "Tem hoje / Não tem hoje" pra avisar o que está disponível.
+- Ela recebe um link público (`olhaai.idsist.com.br/[nome-do-negocio]`) e um QR code pra compartilhar no WhatsApp, Instagram ou impresso.
+- O cliente final abre o link, vê o catálogo, e clica em "Pedir" no item desejado — isso abre o WhatsApp da vendedora com uma mensagem de pedido já escrita.
+
+## Preço
+
+R$ 19,90 por mês, com 30 dias de teste grátis e sem pedir cartão de crédito no cadastro.
+
+## Páginas
+
+- [Página inicial](https://olhaai.idsist.com.br/): explicação do produto e cadastro.
+- [Como funciona](https://olhaai.idsist.com.br/como-funciona): simulador interativo — dá pra testar o cadastro, o painel administrativo e o catálogo do cliente sem criar conta.
+- [Criar conta](https://olhaai.idsist.com.br/cadastro)
+- [Entrar](https://olhaai.idsist.com.br/login)
+- [Termos de uso](https://olhaai.idsist.com.br/termos-de-uso)
+- [Política de privacidade](https://olhaai.idsist.com.br/politica-de-privacidade)
+
+## Público-alvo
+
+Vendedores informais e autônomos no Brasil que hoje vendem por WhatsApp usando apenas fotos soltas em conversa — ex: confeiteiras, salgadeiras, marmiteiras, e prestadores de serviço como limpeza de estofados. Pessoas sem conhecimento técnico, que precisam de algo pronto em minutos e sem complicação.

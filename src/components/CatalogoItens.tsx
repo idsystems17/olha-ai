@@ -84,7 +84,7 @@ export function CatalogoItens({
             {!item.is_available_today && (
               <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                 <span className="text-[9px] font-bold text-white uppercase tracking-wide px-1.5 py-0.5 border border-white/50 rounded">
-                  Acabou
+                  Indisponível
                 </span>
               </div>
             )}
@@ -96,11 +96,11 @@ export function CatalogoItens({
                 <h3 className="font-bold text-slate-800 text-sm leading-tight line-clamp-1">{item.name}</h3>
                 {item.is_available_today ? (
                   <span className="text-[9px] bg-emerald-50 text-emerald-600 border border-emerald-100 px-2 py-0.5 rounded-full font-bold uppercase flex-shrink-0">
-                    Tem hoje
+                    Disponível
                   </span>
                 ) : (
                   <span className="text-[9px] bg-slate-100 text-slate-400 border border-slate-200 px-2 py-0.5 rounded-full font-bold uppercase flex-shrink-0">
-                    Não tem hoje
+                    Indisponível
                   </span>
                 )}
               </div>

@@ -1,57 +1,64 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowDown } from 'lucide-react'
-import { PASSOS_TUTORIAL_PAINEL } from '@/lib/tutorial-painel'
+import { Dancing_Script } from 'next/font/google'
+import { ArrowRight, CheckCircle2, Smartphone, ShoppingBag, PlayCircle, Sparkles } from 'lucide-react'
 
-// Mesmos prints (e mesmas coordenadas de seta) do tutorial de dentro do painel
-// (src/lib/tutorial-painel.ts) — texto aqui em tom de venda, não de instrução.
-const COMO_FUNCIONA = [
-  {
-    imagem: '/tutorial/cardapio.jpg',
-    titulo: 'Monte seu cardápio',
-    texto: 'Foto, nome e preço de cada produto. Marca o que tem hoje em dois toques.',
-    alvo: PASSOS_TUTORIAL_PAINEL[0].alvo,
+const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Olha Aí',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description:
+    'Catálogo digital simples e prático pra quem vende pelo WhatsApp. Foto, preço e um botão que já leva pro pedido pronto, sem taxa por venda.',
+  offers: {
+    '@type': 'Offer',
+    price: '19.90',
+    priceCurrency: 'BRL',
+    description: 'Mensal, após 30 dias grátis sem pedir cartão.',
   },
-  {
-    imagem: '/tutorial/aparencia.jpg',
-    titulo: 'Deixe com a sua cara',
-    texto: 'Escolha as cores do seu negócio e veja o catálogo ganhar vida na hora.',
-    alvo: PASSOS_TUTORIAL_PAINEL[2].alvo,
-  },
-  {
-    imagem: '/tutorial/meu-link.jpg',
-    titulo: 'Compartilhe seu link',
-    texto: 'QR code, WhatsApp, Instagram — o cliente clica e já cai no seu WhatsApp.',
-    alvo: PASSOS_TUTORIAL_PAINEL[4].alvo,
-  },
-] as const
+}
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-orange-50 via-white to-white">
-      <header className="max-w-5xl w-full mx-auto px-6 py-6 flex items-center justify-between">
-        <span className="font-bold text-lg text-slate-800">Olha Aí</span>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
+
+      <header className="max-w-3xl w-full mx-auto px-6 py-6 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-r from-rose-500 to-orange-500 flex items-center justify-center shadow-sm">
+            <span className={`${dancingScript.className} text-white text-[10px] leading-none`}>Olha Aí</span>
+          </div>
+        </div>
         <Link href="/login" className="text-sm font-medium text-slate-500 hover:text-slate-700">
           Já tem catálogo? Entrar
         </Link>
       </header>
 
       <main className="flex-1">
-        <section className="max-w-3xl mx-auto px-6 pt-10 pb-16 text-center">
+        {/* HERO */}
+        <section className="max-w-2xl mx-auto px-6 pt-8 pb-12 text-center">
+          <div className="inline-flex items-center gap-1.5 bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-xs font-semibold mb-5 border border-rose-100">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Pra autônomos e vendedores informais</span>
+          </div>
+
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
             Seu cardápio bonito, no link do WhatsApp
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-xl mx-auto">
-            Um catálogo simples pra mostrar o que você vende hoje — com foto, preço e um
-            botão que já abre o WhatsApp com o pedido pronto. Sem aplicativo pra instalar.
+          <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+            Um catálogo simples pra mostrar o que você vende hoje — com foto, preço e um botão que já
+            abre o WhatsApp com o pedido pronto. Sem aplicativo pra instalar, sem taxa por venda.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3">
             <Link
               href="/cadastro"
-              className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors group"
             >
-              Criar meu catálogo grátis
+              <span>Criar meu catálogo grátis</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <p className="text-sm sm:text-base font-medium text-slate-600">
               30 dias grátis. Depois, R$ 19,90 por mês pra continuar no ar.
@@ -59,79 +66,91 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="max-w-4xl mx-auto px-6 pb-16">
-          <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-6">
-            Por dentro do painel
-          </h2>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {COMO_FUNCIONA.map(({ imagem, titulo, texto, alvo }) => (
-              <div key={titulo} className="text-center">
-                <div className="relative max-w-[160px] mx-auto rounded-2xl border-4 border-white shadow-lg overflow-hidden mb-4">
-                  <Image src={imagem} alt={titulo} width={738} height={1600} className="w-full h-auto" />
-                  {alvo && (
-                    <div
-                      className="absolute animate-bounce"
-                      style={{ left: `${alvo.x}%`, top: `${alvo.y}%`, transform: 'translate(-50%, -100%)' }}
-                    >
-                      <ArrowDown
-                        size={22}
-                        strokeWidth={3.5}
-                        className="text-amber-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]"
-                      />
-                    </div>
-                  )}
-                </div>
-                <h3 className="font-semibold text-slate-800 text-sm">{titulo}</h3>
-                <p className="mt-1.5 text-sm text-slate-500">{texto}</p>
+        {/* CHAMADA PRA DEMO INTERATIVA */}
+        <section className="max-w-2xl mx-auto px-6 pb-16">
+          <Link
+            href="/como-funciona"
+            className="group block rounded-3xl bg-gradient-to-r from-rose-500 to-orange-500 p-6 sm:p-8 shadow-lg shadow-orange-500/20 hover:shadow-xl transition-all"
+          >
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center flex-shrink-0 backdrop-blur-sm">
+                <PlayCircle className="w-8 h-8 text-white" />
               </div>
-            ))}
-          </div>
+              <div className="flex-1 min-w-0 text-left">
+                <p className="text-white/80 text-xs font-bold uppercase tracking-wider mb-1">
+                  100% interativo, sem precisar criar conta
+                </p>
+                <h2 className="text-white font-bold text-lg sm:text-xl leading-snug">
+                  Veja o Olha Aí funcionando de verdade — teste ao vivo
+                </h2>
+              </div>
+              <ArrowRight className="w-6 h-6 text-white flex-shrink-0 transition-transform group-hover:translate-x-1 hidden sm:block" />
+            </div>
+          </Link>
         </section>
 
-        {/* Print real de um catálogo de demonstração (Bolos da Ana) — trocar
-            por um catálogo real assim que a Izis tiver o primeiro cliente. */}
-        <section className="max-w-4xl mx-auto px-6 pb-20">
-          <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-6">
-            Do jeito que o cliente vê
+        {/* DIFERENCIAIS */}
+        <section className="max-w-3xl mx-auto px-6 pb-20">
+          <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-8">
+            Diga adeus ao &ldquo;manda foto no privado&rdquo; e &ldquo;qual o valor?&rdquo;
           </h2>
-          <div className="max-w-[280px] mx-auto rounded-3xl border-4 border-white shadow-xl overflow-hidden">
-            <Image
-              src="/preview-catalogo.png"
-              alt="Exemplo de catálogo no Olha Aí, com fotos, preços e botão de pedido pelo WhatsApp"
-              width={840}
-              height={1340}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
-          <div className="text-center mt-4">
-            <Link
-              href="/exemplo"
-              className="text-sm font-semibold text-orange-600 hover:text-orange-700 underline underline-offset-2"
-            >
-              Ver catálogo de exemplo ao vivo
-            </Link>
+          <div className="grid sm:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mx-auto mb-3">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <h3 className="font-semibold text-slate-800 text-sm">Botão &ldquo;Disponível&rdquo;</h3>
+              <p className="mt-1.5 text-sm text-slate-500">
+                Acabou o bolo de cenoura? Desativa com um toque. O cliente só pede o que está pronto.
+              </p>
+            </div>
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-3">
+                <Smartphone className="w-5 h-5" />
+              </div>
+              <h3 className="font-semibold text-slate-800 text-sm">Criação rápida, direto do celular</h3>
+              <p className="mt-1.5 text-sm text-slate-500">
+                Nome, WhatsApp e as fotos do celular. Sem app pra instalar, sem complicação.
+              </p>
+            </div>
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-3">
+                <ShoppingBag className="w-5 h-5" />
+              </div>
+              <h3 className="font-semibold text-slate-800 text-sm">Pedido direto no seu WhatsApp</h3>
+              <p className="mt-1.5 text-sm text-slate-500">
+                O cliente clica em &ldquo;Pedir&rdquo; e a mensagem já chega pronta. Sem taxa, sem intermediário.
+              </p>
+            </div>
           </div>
         </section>
 
+        {/* CTA FINAL */}
         <section className="max-w-2xl mx-auto px-6 pb-24 text-center">
           <h2 className="text-xl font-bold text-slate-800">Simples assim, sem enrolação</h2>
           <p className="mt-2 text-sm text-slate-500">
             Sem carrinho, sem frete, sem sistema complicado. É só um lugar bonito pra mostrar o
             que você vende e mandar o cliente direto pro seu WhatsApp.
           </p>
-          <Link
-            href="/cadastro"
-            className="mt-6 inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
-          >
-            Criar meu catálogo grátis
-          </Link>
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/cadastro"
+              className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
+            >
+              Criar meu catálogo grátis
+            </Link>
+            <Link
+              href="/como-funciona"
+              className="inline-flex items-center justify-center gap-1.5 text-slate-600 hover:text-slate-800 text-sm font-semibold px-4 py-4"
+            >
+              <PlayCircle className="w-4 h-4" />
+              Testar antes, ao vivo
+            </Link>
+          </div>
         </section>
       </main>
 
-      <footer className="py-8 text-center text-xs text-slate-400">
-        Olha Aí
-      </footer>
+      <footer className="py-8 text-center text-xs text-slate-400">Olha Aí</footer>
     </div>
   )
 }

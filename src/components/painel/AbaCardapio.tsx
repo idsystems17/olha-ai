@@ -228,8 +228,8 @@ export function AbaCardapio({ itemsIniciais }: { itemsIniciais: Item[] }) {
               className={`flex-shrink-0 relative w-10 h-6 rounded-full transition-colors ${
                 item.is_available_today ? 'bg-green-500' : 'bg-slate-300'
               }`}
-              aria-label={item.is_available_today ? 'Tem hoje — clique pra desligar' : 'Não tem hoje — clique pra ligar'}
-              title={item.is_available_today ? 'Tem hoje' : 'Não tem hoje'}
+              aria-label={item.is_available_today ? 'Disponível — clique pra desligar' : 'Indisponível — clique pra ligar'}
+              title={item.is_available_today ? 'Disponível' : 'Indisponível'}
             >
               <span
                 className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
