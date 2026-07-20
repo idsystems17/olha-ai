@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useSyncExternalStore } from 'react'
-import { Layers, Palette, QrCode, UserCircle, Eye, PlayCircle } from 'lucide-react'
+import { Layers, Palette, QrCode, UserCircle, Eye, PlayCircle, Download, MessageCircle } from 'lucide-react'
 import { corDeFundo } from '@/lib/paleta'
 import { linkPublico } from '@/lib/link-publico'
 import { chaveTutorialVisto } from '@/lib/tutorial-painel'
@@ -11,7 +11,9 @@ import { AbaMeuLink } from './AbaMeuLink'
 import { AbaConta } from './AbaConta'
 import { InterruptorLoja } from './InterruptorLoja'
 import { CartaoAssinatura } from './CartaoAssinatura'
-import { TutorialPainel } from './TutorialPainel'
+import { ModalComoUsar } from './ModalComoUsar'
+import { ModalComoInstalar } from './ModalComoInstalar'
+import { SuporteFaq } from '@/components/SuporteFaq'
 
 type Item = {
   id: string
@@ -35,7 +37,7 @@ type Tenant = {
 }
 
 const ABAS = [
-  { id: 'cardapio' as const, label: 'Cardápio', icone: Layers },
+  { id: 'cardapio' as const, label: 'Vitrine', icone: Layers },
   { id: 'aparencia' as const, label: 'Aparência', icone: Palette },
   { id: 'meulink' as const, label: 'Meu link', icone: QrCode },
   { id: 'conta' as const, label: 'Conta', icone: UserCircle },
@@ -63,6 +65,7 @@ export function PainelClient({
   trialAcabou,
   linkCheckout,
   email,
+  emailSuporte,
 }: {
   tenant: Tenant
   itemsIniciais: Item[]
@@ -70,10 +73,13 @@ export function PainelClient({
   trialAcabou: boolean
   linkCheckout: string
   email: string
+  emailSuporte: string | null
 }) {
   const [aba, setAba] = useState<'cardapio' | 'aparencia' | 'meulink' | 'conta'>('cardapio')
   const [tutorialAbertoManual, setTutorialAbertoManual] = useState(false)
   const [tutorialFechadoAgora, setTutorialFechadoAgora] = useState(false)
+  const [comoInstalarAberto, setComoInstalarAberto] = useState(false)
+  const [ajudaAberta, setAjudaAberta] = useState(false)
   const fundo = corDeFundo(tenant.cor_principal, tenant.cor_secundaria)
 
   const primeiroAcesso = usePrimeiroAcesso(tenant.slug)
@@ -113,14 +119,32 @@ export function PainelClient({
         <div className="bg-white rounded-2xl shadow p-5">
           <p className="text-xs text-slate-400 mb-1 truncate">{linkPublico(tenant.slug).replace(/^https?:\/\//, '')}</p>
 
-          <button
-            onClick={() => setTutorialAbertoManual(true)}
-            className="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold mb-4 transition hover:brightness-95"
-            style={{ background: `${tenant.cor_principal}1a`, color: tenant.cor_principal }}
-          >
-            <PlayCircle size={16} />
-            Como usar o painel
-          </button>
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            <button
+              onClick={() => setComoInstalarAberto(true)}
+              className="flex flex-col items-center justify-center gap-1 rounded-xl py-2.5 px-1 text-[11px] font-bold transition hover:brightness-95"
+              style={{ background: `${tenant.cor_principal}1a`, color: tenant.cor_principal }}
+            >
+              <Download size={16} />
+              Instalar
+            </button>
+            <button
+              onClick={() => setTutorialAbertoManual(true)}
+              className="flex flex-col items-center justify-center gap-1 rounded-xl py-2.5 px-1 text-[11px] font-bold transition hover:brightness-95"
+              style={{ background: `${tenant.cor_principal}1a`, color: tenant.cor_principal }}
+            >
+              <PlayCircle size={16} />
+              Como usar
+            </button>
+            <button
+              onClick={() => setAjudaAberta(true)}
+              className="flex flex-col items-center justify-center gap-1 rounded-xl py-2.5 px-1 text-[11px] font-bold transition hover:brightness-95"
+              style={{ background: `${tenant.cor_principal}1a`, color: tenant.cor_principal }}
+            >
+              <MessageCircle size={16} />
+              Ajuda
+            </button>
+          </div>
 
           <InterruptorLoja isOpenInicial={tenant.is_open} />
 
@@ -157,9 +181,18 @@ export function PainelClient({
         ))}
       </nav>
 
-      {tutorialAberto && (
-        <TutorialPainel slug={tenant.slug} corPrincipal={tenant.cor_principal} onFechar={fecharTutorial} />
+      {tutorialAberto && <ModalComoUsar slug={tenant.slug} onFechar={fecharTutorial} />}
+
+      {comoInstalarAberto && (
+        <ModalComoInstalar corPrincipal={tenant.cor_principal} onFechar={() => setComoInstalarAberto(false)} />
       )}
+
+      <SuporteFaq
+        aberto={ajudaAberta}
+        onFechar={() => setAjudaAberta(false)}
+        emailSuporte={emailSuporte}
+        nomeNegocio={tenant.name}
+      />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { SuporteFaq } from '@/components/SuporteFaq'
 import { PainelClient } from '@/components/painel/PainelClient'
 import { PopupAssinaturaAtiva } from '@/components/painel/PopupAssinaturaAtiva'
 import { linkCheckoutKiwify } from '@/lib/kiwify'
@@ -42,8 +41,8 @@ export default async function PainelPage() {
         trialAcabou={trialAcabou}
         linkCheckout={linkCheckoutKiwify(tenant.id)}
         email={user.email ?? ''}
+        emailSuporte={process.env.NEXT_PUBLIC_SUPORTE_EMAIL ?? null}
       />
-      <SuporteFaq emailSuporte={process.env.NEXT_PUBLIC_SUPORTE_EMAIL ?? null} nomeNegocio={tenant.name} />
       <Suspense fallback={null}>
         <PopupAssinaturaAtiva />
       </Suspense>

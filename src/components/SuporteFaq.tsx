@@ -1,11 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { MessageCircle, X, ChevronDown, Mail } from 'lucide-react'
+import { X, ChevronDown, Mail } from 'lucide-react'
 import { FAQ_ITEMS } from '@/lib/faq-suporte'
 
-export function SuporteFaq({ emailSuporte, nomeNegocio }: { emailSuporte: string | null; nomeNegocio: string }) {
-  const [aberto, setAberto] = useState(false)
+type Props = {
+  aberto: boolean
+  onFechar: () => void
+  emailSuporte: string | null
+  nomeNegocio: string
+}
+
+export function SuporteFaq({ aberto, onFechar, emailSuporte, nomeNegocio }: Props) {
   const [expandido, setExpandido] = useState<number | null>(null)
   const [pergunta, setPergunta] = useState('')
 
@@ -16,24 +22,13 @@ export function SuporteFaq({ emailSuporte, nomeNegocio }: { emailSuporte: string
     window.location.href = `mailto:${emailSuporte}?subject=${assunto}&body=${corpo}`
   }
 
-  if (!aberto) {
-    return (
-      <button
-        onClick={() => setAberto(true)}
-        className="fixed bottom-20 right-5 z-50 flex items-center gap-2 rounded-full bg-slate-900 text-white px-4 py-3 shadow-lg hover:bg-slate-800 transition"
-        aria-label="Abrir dúvidas frequentes"
-      >
-        <MessageCircle size={20} />
-        <span className="text-sm font-medium">Ajuda</span>
-      </button>
-    )
-  }
+  if (!aberto) return null
 
   return (
     <div className="fixed bottom-20 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[480px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
       <div className="flex items-center justify-between px-4 py-3 bg-slate-900 text-white shrink-0">
         <span className="text-sm font-semibold">Dúvidas frequentes</span>
-        <button onClick={() => setAberto(false)} aria-label="Fechar ajuda">
+        <button onClick={onFechar} aria-label="Fechar ajuda">
           <X size={18} />
         </button>
       </div>

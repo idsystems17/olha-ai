@@ -11,7 +11,7 @@ import type { ItemDemo, PerfilDemo } from '@/lib/tutorial-demo-data'
 type Aba = 'cardapio' | 'aparencia' | 'meulink' | 'conta'
 
 const ABAS: { id: Aba; label: string; icone: typeof Layers }[] = [
-  { id: 'cardapio', label: 'Cardápio', icone: Layers },
+  { id: 'cardapio', label: 'Vitrine', icone: Layers },
   { id: 'aparencia', label: 'Aparência', icone: Palette },
   { id: 'meulink', label: 'Meu link', icone: QrCode },
   { id: 'conta', label: 'Conta', icone: UserCircle },
@@ -97,20 +97,38 @@ export function PainelDemoScreen({
         <div className="bg-white rounded-2xl shadow p-4">
           <p className="text-[10px] text-slate-400 mb-1 truncate">olhaai.app/{perfil.slug}</p>
 
-          <button
-            onClick={() => onToast('Como usar o painel', 'Aqui abriria o tutorial passo a passo de dentro do painel real.')}
-            className="w-full flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-bold mb-3 transition hover:brightness-95"
-            style={{ background: `${corPrincipal}1a`, color: corPrincipal }}
-          >
-            <PlayCircle size={14} />
-            Como usar o painel
-          </button>
+          <div className="grid grid-cols-3 gap-1.5 mb-3">
+            <button
+              onClick={() => onToast('Instalar', 'Aqui abriria o passo a passo pra instalar o painel na tela inicial.')}
+              className="flex flex-col items-center justify-center gap-0.5 rounded-xl py-2 px-1 text-[10px] font-bold transition hover:brightness-95"
+              style={{ background: `${corPrincipal}1a`, color: corPrincipal }}
+            >
+              <Download size={13} />
+              Instalar
+            </button>
+            <button
+              onClick={() => onToast('Como usar', 'Você já está usando! No painel real, isso abre esse mesmo simulador.')}
+              className="flex flex-col items-center justify-center gap-0.5 rounded-xl py-2 px-1 text-[10px] font-bold transition hover:brightness-95"
+              style={{ background: `${corPrincipal}1a`, color: corPrincipal }}
+            >
+              <PlayCircle size={13} />
+              Como usar
+            </button>
+            <button
+              onClick={() => onToast('Ajuda', 'Aqui abriria as dúvidas frequentes, de dentro do painel real.')}
+              className="flex flex-col items-center justify-center gap-0.5 rounded-xl py-2 px-1 text-[10px] font-bold transition hover:brightness-95"
+              style={{ background: `${corPrincipal}1a`, color: corPrincipal }}
+            >
+              <MessageCircle size={13} />
+              Ajuda
+            </button>
+          </div>
 
           <div className="flex items-center justify-between gap-3 mb-3 px-3 py-2 rounded-xl bg-slate-50 border border-slate-100">
             <div>
               <p className="text-xs font-semibold text-slate-700">{lojaAberta ? 'Loja aberta' : 'Loja fechada'}</p>
               <p className="text-[10px] text-slate-400">
-                {lojaAberta ? 'Clientes conseguem pedir.' : 'Cardápio visível, mas ninguém pede.'}
+                {lojaAberta ? 'Clientes conseguem pedir.' : 'Vitrine visível, mas ninguém pede.'}
               </p>
             </div>
             <button
