@@ -50,11 +50,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!dados) return { title: 'Olha Aí' }
 
   const base = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '')
+  const titulo = dados.tenant.name
+  const descricao = dados.tenant.bio ?? `Catálogo de ${dados.tenant.name} no Olha Aí`
 
   return {
-    title: dados.tenant.name,
-    description: dados.tenant.bio ?? `Catálogo de ${dados.tenant.name} no Olha Aí`,
+    title: titulo,
+    description: descricao,
     manifest: `${base}/api/manifest/${slug}`,
+    alternates: { canonical: `${base}/${slug}` },
+    // Precisa ser explícito aqui — sem isso o preview no WhatsApp/redes herda o
+    // openGraph fixo do layout raiz (marca genérica) em vez do nome/foto da loja.
+    openGraph: {
+      title: titulo,
+      description: descricao,
+      url: `${base}/${slug}`,
+      siteName: 'Olha Aí',
+      type: 'website',
+      locale: 'pt_BR',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titulo,
+      description: descricao,
+    },
   }
 }
 
@@ -122,7 +140,7 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
       <main className="max-w-md w-full mx-auto px-4">
         {!tenant.is_open && items.length > 0 && (
           <p className="text-center text-xs text-slate-500 bg-slate-100 border border-slate-200 rounded-xl py-2 px-3 mb-3">
-            A loja está fechada no momento — dá pra ver o cardápio, mas não pra pedir agora.
+            A loja está fechada no momento — dá pra ver a vitrine, mas não pra pedir agora.
           </p>
         )}
         <CatalogoItens items={items} whatsapp={tenant.whatsapp} lojaAberta={tenant.is_open} />

@@ -71,15 +71,21 @@ export default function CadastroPage() {
         </div>
 
         <form onSubmit={handleCadastro} className="space-y-3">
-          <input
-            type="text"
-            placeholder="Nome do seu negócio"
-            value={nomeNegocio}
-            onChange={(e) => setNomeNegocio(e.target.value)}
-            required
-            maxLength={120}
-            className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
-          />
+          <div>
+            <input
+              type="text"
+              placeholder="Seu nome (ex: Aparecida)"
+              value={nomeNegocio}
+              onChange={(e) => setNomeNegocio(e.target.value)}
+              required
+              maxLength={120}
+              className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
+            />
+            <p className="text-[11px] text-slate-400 mt-1 px-1">
+              Pode ser seu nome ou como você gosta de ser chamada — ex: Aparecida, mas prefere &quot;Cida&quot;.
+              Dá pra trocar o nome do negócio depois, dentro do painel.
+            </p>
+          </div>
           <input
             type="tel"
             placeholder="WhatsApp com DDD"

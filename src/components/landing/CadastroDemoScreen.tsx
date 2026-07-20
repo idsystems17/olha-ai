@@ -39,16 +39,17 @@ export function CadastroDemoScreen({ onConcluir }: { onConcluir: (nomeNegocio: s
       >
         <div className="space-y-1">
           <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
-            Nome do negócio
+            Seu nome
           </label>
           <input
             type="text"
             required
-            placeholder="Ex: Doces da Vovó"
+            placeholder="Ex: Aparecida (ou Cida)"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             className="w-full px-3 py-2.5 bg-slate-50 border border-slate-150 rounded-xl text-xs text-slate-700 outline-none focus:border-orange-300"
           />
+          <p className="text-[9px] text-slate-400">Pode ser um apelido — dá pra trocar o nome do negócio depois.</p>
         </div>
 
         <div className="space-y-1">

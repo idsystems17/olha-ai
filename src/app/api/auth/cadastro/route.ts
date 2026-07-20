@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { slugify, SLUGS_RESERVADOS } from '@/lib/slug'
+import { slugify } from '@/lib/slug'
 import { normalizarCpf, hashCpf } from '@/lib/cpf'
 import { normalizarWhatsapp } from '@/lib/whatsapp'
 
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Preencha todos os campos.' }, { status: 400 })
   }
   if (nomeNegocio.length > 120) {
-    return NextResponse.json({ error: 'Nome do negócio muito longo.' }, { status: 400 })
+    return NextResponse.json({ error: 'Nome muito longo.' }, { status: 400 })
   }
   if (senha.length < 8) {
     return NextResponse.json({ error: 'A senha deve ter pelo menos 8 caracteres.' }, { status: 400 })
@@ -50,13 +50,13 @@ export async function POST(request: NextRequest) {
 
   const reativacao = Boolean(cpfExistente)
 
-  // Gera um slug único a partir do nome do negócio
-  let slug = slugify(nomeNegocio)
-  if (SLUGS_RESERVADOS.has(slug)) {
-    slug = `${slug}-${Math.floor(1000 + Math.random() * 9000)}`
-  }
+  // O slug sempre leva um sufixo numérico e nunca é só o nome puro — assim ele
+  // não fica preso ao que ela vendia no dia do cadastro (ex: trocou de "Saladas"
+  // pra "Bolos" e o link continuava com o nome antigo).
+  const baseSlug = slugify(nomeNegocio)
+  let slug = ''
   for (let tentativa = 0; tentativa < 5; tentativa++) {
-    const candidato = tentativa === 0 ? slug : `${slug}-${Math.floor(1000 + Math.random() * 9000)}`
+    const candidato = `${baseSlug}-${Math.floor(1000 + Math.random() * 9000)}`
     const { data: slugExistente } = await admin
       .from('tenants')
       .select('id')
