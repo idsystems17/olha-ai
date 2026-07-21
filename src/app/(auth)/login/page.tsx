@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Loader2 } from 'lucide-react'
+import { CampoSenha } from '@/components/CampoSenha'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -52,8 +53,7 @@ export default function LoginPage() {
             autoComplete="email"
             className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
           />
-          <input
-            type="password"
+          <CampoSenha
             placeholder="Senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}

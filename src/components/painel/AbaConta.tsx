@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { formatarWhatsappVisual } from '@/lib/whatsapp'
+import { CampoSenha } from '@/components/CampoSenha'
 
 const LINK_ASSINATURAS_KIWIFY = 'https://dashboard.kiwify.com.br/minhas-compras'
 
@@ -218,8 +219,7 @@ export function AbaConta({
       <form onSubmit={trocarSenha} className="space-y-4">
         <div>
           <label className="text-xs font-semibold text-slate-600 block mb-1">Senha atual</label>
-          <input
-            type="password"
+          <CampoSenha
             value={senhaAtual}
             onChange={(e) => setSenhaAtual(e.target.value)}
             required
@@ -230,8 +230,7 @@ export function AbaConta({
 
         <div>
           <label className="text-xs font-semibold text-slate-600 block mb-1">Nova senha</label>
-          <input
-            type="password"
+          <CampoSenha
             value={novaSenha}
             onChange={(e) => setNovaSenha(e.target.value)}
             required
@@ -243,8 +242,7 @@ export function AbaConta({
 
         <div>
           <label className="text-xs font-semibold text-slate-600 block mb-1">Confirmar nova senha</label>
-          <input
-            type="password"
+          <CampoSenha
             value={confirmarSenha}
             onChange={(e) => setConfirmarSenha(e.target.value)}
             required
@@ -314,8 +312,7 @@ export function AbaConta({
               Isso apaga sua conta, seu catálogo e todos os produtos de vez — não dá pra desfazer.
               Confirme sua senha pra continuar.
             </p>
-            <input
-              type="password"
+            <CampoSenha
               value={senhaExclusao}
               onChange={(e) => setSenhaExclusao(e.target.value)}
               placeholder="Sua senha"

@@ -145,7 +145,7 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="py-8 text-center text-xs text-slate-400">Olha Aí</footer>
+      <footer className="py-8 text-center text-xs text-orange-400">Olha Aí</footer>
     </div>
   )
 }

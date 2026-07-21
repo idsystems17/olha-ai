@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Loader2 } from 'lucide-react'
 import { formatarWhatsappVisual } from '@/lib/whatsapp'
+import { CampoSenha } from '@/components/CampoSenha'
 
 function formatarCpf(valor: string): string {
   const digitos = valor.replace(/\D/g, '').slice(0, 11)
@@ -112,8 +113,7 @@ export default function CadastroPage() {
             autoComplete="email"
             className="w-full bg-slate-50 rounded-xl py-3.5 px-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-orange-300 transition-all"
           />
-          <input
-            type="password"
+          <CampoSenha
             placeholder="Crie uma senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}

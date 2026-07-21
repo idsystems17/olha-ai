@@ -158,7 +158,7 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
       </div>
 
       <footer className="py-6 text-center">
-        <Link href="/" className={`${dancingScript.className} text-lg text-slate-300 hover:text-slate-400 transition`}>
+        <Link href="/" className={`${dancingScript.className} text-lg text-orange-400 hover:text-orange-500 transition`}>
           Olha Aí
         </Link>
       </footer>
