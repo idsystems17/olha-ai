@@ -145,7 +145,23 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="py-8 text-center text-xs text-orange-400">Olha Aí</footer>
+      <footer className="py-8 px-6 text-center">
+        <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
+          <Link href="/termos-de-uso" className="hover:text-slate-600">
+            Termos de uso
+          </Link>
+          <Link href="/politica-de-privacidade" className="hover:text-slate-600">
+            Política de privacidade
+          </Link>
+        </div>
+        <p className="mt-3 text-[11px] text-slate-400 max-w-md mx-auto leading-relaxed">
+          Este site não é afiliado, endossado ou administrado por Facebook, Meta, Google ou
+          qualquer uma dessas empresas.
+        </p>
+        <p className="mt-2 text-xs text-orange-400">
+          &copy; {new Date().getFullYear()} Olha Aí. Todos os direitos reservados.
+        </p>
+      </footer>
     </div>
   )
 }
