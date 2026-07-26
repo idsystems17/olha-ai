@@ -68,7 +68,7 @@ export default function CadastroPage() {
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-slate-800">Olha Aí</h1>
-          <p className="text-sm text-slate-500 mt-1">Crie seu catálogo em 1 minuto</p>
+          <p className="text-sm text-slate-500 mt-1">Crie sua vitrine em 1 minuto</p>
         </div>
 
         <form onSubmit={handleCadastro} className="space-y-3">
@@ -130,7 +130,7 @@ export default function CadastroPage() {
             disabled={loading}
             className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white rounded-full py-4 text-sm font-medium tracking-wide mt-1 flex items-center justify-center gap-2 transition-colors shadow-md"
           >
-            {loading ? (<><Loader2 size={14} className="animate-spin" /> Criando...</>) : 'Criar meu catálogo grátis'}
+            {loading ? (<><Loader2 size={14} className="animate-spin" /> Criando...</>) : 'Criar minha vitrine grátis'}
           </button>
         </form>
 

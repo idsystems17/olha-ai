@@ -77,7 +77,7 @@ export default function LoginPage() {
           <Link href="/esqueci-senha" className="text-xs text-orange-600">Esqueceu a senha?</Link>
         </p>
         <p className="text-center mt-2 text-xs text-slate-500">
-          Ainda não tem catálogo?{' '}
+          Ainda não tem vitrine?{' '}
           <Link href="/cadastro" className="text-orange-600 font-semibold">Criar grátis</Link>
         </p>
       </div>

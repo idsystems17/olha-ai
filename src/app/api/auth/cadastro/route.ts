@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
     // Reverte a criação do usuário se o catálogo não puder ser criado
     await admin.auth.admin.deleteUser(userId)
     console.error('[cadastro] Erro ao criar tenant:', erroTenant.message)
-    return NextResponse.json({ error: 'Erro ao criar catálogo. Tente novamente.' }, { status: 500 })
+    return NextResponse.json({ error: 'Erro ao criar vitrine. Tente novamente.' }, { status: 500 })
   }
 
   if (!reativacao) {

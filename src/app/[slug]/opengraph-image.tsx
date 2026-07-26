@@ -5,7 +5,7 @@ import { corDeFundo } from '@/lib/paleta'
 export const dynamic = 'force-dynamic'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const alt = 'Catálogo no Olha Aí'
+export const alt = 'Vitrine no Olha Aí'
 
 export default async function OpengraphImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

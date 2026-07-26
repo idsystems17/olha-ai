@@ -15,7 +15,7 @@ async function tenantDoUsuario(supabase: Awaited<ReturnType<typeof createClient>
   if (!user) return { erro: NextResponse.json({ error: 'Não autenticado.' }, { status: 401 }) }
 
   const { data: tenant } = await supabase.from('tenants').select('id').eq('user_id', user.id).single()
-  if (!tenant) return { erro: NextResponse.json({ error: 'Catálogo não encontrado.' }, { status: 404 }) }
+  if (!tenant) return { erro: NextResponse.json({ error: 'Vitrine não encontrada.' }, { status: 404 }) }
 
   return { tenantId: tenant.id }
 }

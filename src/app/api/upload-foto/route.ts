@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     .single()
 
   if (!tenant) {
-    return NextResponse.json({ error: 'Catálogo não encontrado.' }, { status: 404 })
+    return NextResponse.json({ error: 'Vitrine não encontrada.' }, { status: 404 })
   }
 
   const formData = await request.formData()

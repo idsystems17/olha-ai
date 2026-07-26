@@ -29,7 +29,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
   const manifest = {
     name: nome,
     short_name: nome.slice(0, 20),
-    description: `Catálogo de ${nome} no Olha Aí`,
+    description: `Vitrine de ${nome} no Olha Aí`,
     start_url: `/${slug}`,
     display: 'standalone',
     background_color: '#ffffff',

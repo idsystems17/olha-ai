@@ -18,7 +18,7 @@ function formatarPreco(valor: number): string {
 }
 
 function linkWhatsappItem(whatsapp: string, nomeItem: string): string {
-  return linkWhatsapp(whatsapp, `Oi! Vi seu catálogo no Olha Aí e quero pedir: ${nomeItem}`)
+  return linkWhatsapp(whatsapp, `Oi! Vi sua vitrine no Olha Aí e quero pedir: ${nomeItem}`)
 }
 
 export function CatalogoItens({
@@ -41,7 +41,7 @@ export function CatalogoItens({
     : items
 
   if (items.length === 0) {
-    return <p className="text-center text-sm text-slate-400 py-10">Ainda não tem itens no catálogo.</p>
+    return <p className="text-center text-sm text-slate-400 py-10">Ainda não tem itens na vitrine.</p>
   }
 
   return (

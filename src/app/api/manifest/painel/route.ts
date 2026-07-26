@@ -22,7 +22,7 @@ export async function GET() {
   const manifest = {
     name: nome,
     short_name: nome.slice(0, 20),
-    description: 'Painel pra gerenciar seu catálogo no Olha Aí',
+    description: 'Painel pra gerenciar sua vitrine no Olha Aí',
     start_url: '/painel',
     display: 'standalone',
     background_color: '#f8fafc',

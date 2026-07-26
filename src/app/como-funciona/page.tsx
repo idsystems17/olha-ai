@@ -3,7 +3,7 @@ import { TutorialInterativo } from '@/components/landing/TutorialInterativo'
 
 const TITULO = 'Como funciona o Olha Aí — teste ao vivo'
 const DESCRICAO =
-  'Simulador interativo do Olha Aí: veja o cadastro, o painel e o catálogo do cliente funcionando de verdade, com exemplos reais de quem já vende pelo WhatsApp.'
+  'Simulador interativo do Olha Aí: veja o cadastro, o painel e a vitrine do cliente funcionando de verdade, com exemplos reais de quem já vende pelo WhatsApp.'
 
 export const metadata: Metadata = {
   title: TITULO,

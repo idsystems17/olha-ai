@@ -15,7 +15,7 @@ export default function TermosDeUsoPage() {
           <section>
             <h2 className="font-semibold text-slate-800 mb-1.5">O que é o Olha Aí</h2>
             <p>
-              O Olha Aí é uma ferramenta que permite criar um catálogo digital de produtos,
+              O Olha Aí é uma ferramenta que permite criar uma vitrine digital de produtos,
               compartilhável por link, com pedidos feitos diretamente pelo WhatsApp da vendedora
               ou vendedor. Ao criar uma conta, você concorda com estes termos.
             </p>
@@ -24,7 +24,7 @@ export default function TermosDeUsoPage() {
           <section>
             <h2 className="font-semibold text-slate-800 mb-1.5">Sua conta</h2>
             <p>
-              Você é responsável pelas informações que publica no seu catálogo (produtos, preços,
+              Você é responsável pelas informações que publica na sua vitrine (produtos, preços,
               fotos, descrição) e pela veracidade dos dados informados no cadastro. Não é permitido
               usar o Olha Aí pra anunciar produtos ilegais, ou se passar por outra pessoa/empresa.
             </p>
@@ -33,8 +33,8 @@ export default function TermosDeUsoPage() {
           <section>
             <h2 className="font-semibold text-slate-800 mb-1.5">Período de teste e assinatura</h2>
             <p>
-              A conta começa com um período de teste gratuito. Depois disso, o catálogo público
-              só continua ativo pra quem assina o plano pago. Os pagamentos são processados pela
+              A conta começa com um período de teste gratuito. Depois disso, a vitrine pública
+              só continua ativa pra quem assina o plano pago. Os pagamentos são processados pela
               Kiwify; dúvidas sobre cobrança podem ser tratadas direto com o suporte deles ou com
               a gente.
             </p>

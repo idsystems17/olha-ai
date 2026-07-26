@@ -33,7 +33,7 @@ export function CatalogoDemoScreen({
     : items
 
   function pedir(item: ItemDemo) {
-    const mensagem = `Oi! Vi seu catálogo no Olha Aí e quero pedir: ${item.name}`
+    const mensagem = `Oi! Vi sua vitrine no Olha Aí e quero pedir: ${item.name}`
     onToast('Isso abriria seu WhatsApp', `Mensagem pronta: "${mensagem}"`)
   }
 

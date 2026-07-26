@@ -26,7 +26,7 @@ export function PopupAssinaturaAtiva() {
         </div>
         <h2 className="font-bold text-slate-800 text-lg">Sua assinatura está ativa!</h2>
         <p className="text-sm text-slate-500 mt-1.5">
-          Seu catálogo continua no ar pros seus clientes. Obrigada por assinar o Olha Aí.
+          Sua vitrine continua no ar pros seus clientes. Obrigada por assinar o Olha Aí.
         </p>
         <button
           onClick={() => setFechado(true)}

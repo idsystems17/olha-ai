@@ -22,7 +22,7 @@ type Tela = 'cadastro' | 'painel' | 'catalogo'
 const CONTROLES: { id: Tela; label: string; icone: typeof Globe }[] = [
   { id: 'cadastro', label: 'Cadastro', icone: Sparkles },
   { id: 'painel', label: 'Painel', icone: LayoutGrid },
-  { id: 'catalogo', label: 'Catálogo do cliente', icone: Globe },
+  { id: 'catalogo', label: 'Vitrine do cliente', icone: Globe },
 ]
 
 const NEGOCIO_NOVO_ITEM: ItemDemo = {
@@ -57,7 +57,7 @@ export function TutorialInterativo() {
     setCorSecundaria(perfil.corSecundaria)
     setLojaAberta(perfil.isOpen)
     setTela('catalogo')
-    mostrarToast('Carregado!', `O catálogo de "${perfil.name}" está ativo no simulador.`)
+    mostrarToast('Carregado!', `A vitrine de "${perfil.name}" está ativa no simulador.`)
   }
 
   function concluirCadastroDemo(nomeNegocio: string) {
@@ -68,7 +68,7 @@ export function TutorialInterativo() {
       name: nomeNegocio,
       slug: nomeNegocio.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, ''),
       whatsapp: '',
-      bio: `Bem-vindo ao catálogo de ${nomeNegocio}! Veja o que está disponível hoje.`,
+      bio: `Bem-vindo à vitrine de ${nomeNegocio}! Veja o que está disponível hoje.`,
       logoUrl: '',
       corPrincipal: LARANJA_MARCA,
       corSecundaria: null,
@@ -82,7 +82,7 @@ export function TutorialInterativo() {
     setCorSecundaria(null)
     setLojaAberta(true)
     setTela('painel')
-    mostrarToast('Catálogo criado!', `Pronto! "${nomeNegocio}" já está pronto pra configurar.`)
+    mostrarToast('Vitrine criada!', `Pronto! "${nomeNegocio}" já está pronto pra configurar.`)
   }
 
   function alternarItem(id: string) {
@@ -99,7 +99,7 @@ export function TutorialInterativo() {
 
         <div className="inline-flex items-center gap-1.5 bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-xs font-semibold mb-4 border border-rose-100">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Catálogo digital simples e prático pra quem vende pelo WhatsApp</span>
+          <span>Vitrine digital simples e prática pra quem vende pelo WhatsApp</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
@@ -116,11 +116,11 @@ export function TutorialInterativo() {
             href="/cadastro"
             className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-7 py-3.5 text-sm font-semibold shadow-md transition-colors group"
           >
-            <span>Criar meu catálogo grátis</span>
+            <span>Criar minha vitrine grátis</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link href="/login" className="text-sm font-medium text-slate-500 hover:text-slate-700">
-            Já tem catálogo? Entrar
+            Já tem vitrine? Entrar
           </Link>
         </div>
         <p className="mt-2 text-xs text-slate-400">
@@ -173,7 +173,7 @@ export function TutorialInterativo() {
             })}
           </div>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            Exemplos fictícios só pra ilustrar — quando você assinar, o catálogo é 100% seu, com
+            Exemplos fictícios só pra ilustrar — quando você assinar, a vitrine é 100% sua, com
             seus produtos e suas fotos.
           </p>
         </div>
@@ -302,7 +302,7 @@ export function TutorialInterativo() {
           href="/cadastro"
           className="w-full inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-6 rounded-2xl transition-all text-sm"
         >
-          Criar meu catálogo grátis
+          Criar minha vitrine grátis
         </Link>
       </section>
     </div>

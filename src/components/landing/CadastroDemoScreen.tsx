@@ -26,7 +26,7 @@ export function CadastroDemoScreen({ onConcluir }: { onConcluir: (nomeNegocio: s
         <span className="text-[10px] bg-orange-50 text-orange-600 font-extrabold py-1 px-3 rounded-full border border-orange-100 uppercase">
           Passo único
         </span>
-        <h2 className="text-xl font-bold text-slate-800 mt-2">Criar meu catálogo</h2>
+        <h2 className="text-xl font-bold text-slate-800 mt-2">Criar minha vitrine</h2>
         <p className="text-xs text-slate-400 mt-1">Sua página profissional em menos de 1 minuto.</p>
       </div>
 
@@ -96,7 +96,7 @@ export function CadastroDemoScreen({ onConcluir }: { onConcluir: (nomeNegocio: s
           type="submit"
           className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-md text-xs transition-colors"
         >
-          Criar meu catálogo grátis
+          Criar minha vitrine grátis
         </button>
       </form>
     </div>

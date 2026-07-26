@@ -103,7 +103,7 @@ export function PainelClient({
             className="flex-shrink-0 bg-white/20 hover:bg-white/35 font-bold py-1.5 px-3 rounded-full text-xs flex items-center gap-1.5 transition"
           >
             <Eye className="w-3.5 h-3.5" />
-            <span>Ver catálogo</span>
+            <span>Ver vitrine</span>
           </a>
         </div>
       </header>

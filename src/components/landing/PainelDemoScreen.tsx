@@ -62,7 +62,7 @@ export function PainelDemoScreen({
             className="flex-shrink-0 bg-white/20 hover:bg-white/35 font-bold py-1.5 px-2.5 rounded-full text-[10px] flex items-center gap-1 transition"
           >
             <Eye className="w-3 h-3" />
-            <span>Ver catálogo</span>
+            <span>Ver vitrine</span>
           </button>
         </div>
       </header>
@@ -95,7 +95,7 @@ export function PainelDemoScreen({
         </div>
 
         <div className="bg-white rounded-2xl shadow p-4">
-          <p className="text-[10px] text-slate-400 mb-1 truncate">olhaai.app/{perfil.slug}</p>
+          <p className="text-[10px] text-slate-400 mb-1 truncate">olhaai.idsist.com.br/{perfil.slug}</p>
 
           <div className="grid grid-cols-3 gap-1.5 mb-3">
             <button
@@ -245,10 +245,10 @@ export function PainelDemoScreen({
                   </div>
                 </div>
               </div>
-              <p className="text-[10px] text-slate-400">olhaai.app/{perfil.slug}</p>
+              <p className="text-[10px] text-slate-400">olhaai.idsist.com.br/{perfil.slug}</p>
               <div className="grid grid-cols-2 gap-2">
                 <button
-                  onClick={() => onToast('Link copiado!', 'O link público do catálogo foi copiado.')}
+                  onClick={() => onToast('Link copiado!', 'O link público da vitrine foi copiado.')}
                   className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-slate-200 text-slate-700 text-[10px] font-semibold"
                 >
                   <Copy size={13} />

@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const base = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '')
   const titulo = dados.tenant.name
-  const descricao = dados.tenant.bio ?? `Catálogo de ${dados.tenant.name} no Olha Aí`
+  const descricao = dados.tenant.bio ?? `Vitrine de ${dados.tenant.name} no Olha Aí`
 
   return {
     title: titulo,
@@ -150,10 +150,10 @@ export default async function PaginaPublicaCatalogo({ params }: { params: Promis
         <CompartilharBotao
           url={linkPublico(tenant.slug)}
           titulo={tenant.name}
-          texto={`Dá uma olhada no catálogo de ${tenant.name}!`}
+          texto={`Dá uma olhada na vitrine de ${tenant.name}!`}
           className="w-full border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-xs transition"
         >
-          Indicar esse catálogo pra alguém
+          Indicar essa vitrine pra alguém
         </CompartilharBotao>
       </div>
 

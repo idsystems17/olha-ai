@@ -138,7 +138,7 @@ export function AbaMeuLink({ slug, nomeNegocio, logoUrl, corPrincipal, corSecund
           // eslint-disable-next-line @next/next/no-img-element -- data URL gerada no navegador, não é imagem de arquivo
           <img
             src={qrDataUrl}
-            alt={`QR code do catálogo de ${nomeNegocio}`}
+            alt={`QR code da vitrine de ${nomeNegocio}`}
             className="w-40 h-40 rounded-xl border border-slate-200"
           />
         ) : (

@@ -43,7 +43,7 @@ export function CartaoAssinatura({
             <>
               <p className="text-xs font-bold text-slate-800 leading-tight">Seu período grátis acabou</p>
               <p className="text-[10px] text-slate-500 mt-0.5 leading-relaxed">
-                Seu catálogo está fora do ar pros clientes. Se não assinar logo, seus dados (fotos e
+                Sua vitrine está fora do ar pros clientes. Se não assinar logo, seus dados (fotos e
                 vitrine) serão apagados.
               </p>
             </>

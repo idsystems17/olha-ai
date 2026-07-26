@@ -17,7 +17,7 @@ type Tela = 'painel' | 'catalogo'
 
 const CONTROLES: { id: Tela; label: string; icone: typeof LayoutGrid }[] = [
   { id: 'painel', label: 'Painel', icone: LayoutGrid },
-  { id: 'catalogo', label: 'Catálogo do cliente', icone: Globe },
+  { id: 'catalogo', label: 'Vitrine do cliente', icone: Globe },
 ]
 
 export function ModalComoUsar({ slug, onFechar }: { slug: string; onFechar: () => void }) {
@@ -53,7 +53,7 @@ export function ModalComoUsar({ slug, onFechar }: { slug: string; onFechar: () =
 
       <div className="flex-1 min-h-0 flex flex-col items-center overflow-y-auto px-4 pt-2 pb-6 gap-4">
         <p className="text-xs text-slate-500 text-center max-w-xs leading-relaxed">
-          Esse é um catálogo de exemplo — clica à vontade pra testar. Não mexe na sua loja de verdade.
+          Essa é uma vitrine de exemplo — clica à vontade pra testar. Não mexe na sua loja de verdade.
         </p>
 
         <div className="grid grid-cols-2 gap-2 w-full max-w-[320px]">

@@ -23,7 +23,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     pergunta: 'Pra que serve o botão "disponível / indisponível" em cada item?',
-    resposta: 'É pra avisar rapidinho quando algo não está disponível no momento, sem precisar apagar o item do catálogo. Só clicar pra ligar ou desligar.',
+    resposta: 'É pra avisar rapidinho quando algo não está disponível no momento, sem precisar apagar o item da vitrine. Só clicar pra ligar ou desligar.',
   },
   {
     pergunta: 'Onde eu pego meu link e QR code pra divulgar?',
@@ -42,7 +42,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     resposta: 'É só pra evitar que a mesma pessoa crie várias contas de teste grátis seguidas. Seu CPF não aparece pra ninguém, nem pros seus clientes.',
   },
   {
-    pergunta: 'Posso mudar o link (endereço) do meu catálogo depois?',
-    resposta: 'Hoje o link é gerado automaticamente a partir do nome do negócio no cadastro e não pode ser trocado pelo painel ainda.',
+    pergunta: 'Posso mudar o link (endereço) da minha vitrine depois?',
+    resposta: 'O link é gerado a partir do seu nome no cadastro (não do nome do negócio), então ele não muda mesmo se você trocar o que vende — e ainda não pode ser editado pelo painel.',
   },
 ]

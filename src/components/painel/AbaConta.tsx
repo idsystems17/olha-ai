@@ -280,7 +280,7 @@ export function AbaConta({
             <p className="text-xs text-rose-600">
               Sua assinatura na Kiwify ainda está ativa. Excluir sua conta aqui{' '}
               <strong>não cancela a cobrança lá</strong> — você continuaria sendo cobrada todo
-              mês mesmo sem o catálogo. Cancele primeiro na Kiwify, depois volte aqui pra excluir.
+              mês mesmo sem a vitrine. Cancele primeiro na Kiwify, depois volte aqui pra excluir.
             </p>
             <a
               href={LINK_ASSINATURAS_KIWIFY}
@@ -309,7 +309,7 @@ export function AbaConta({
         ) : (
           <form onSubmit={excluirConta} className="space-y-3">
             <p className="text-xs text-rose-600">
-              Isso apaga sua conta, seu catálogo e todos os produtos de vez — não dá pra desfazer.
+              Isso apaga sua conta, sua vitrine e todos os produtos de vez — não dá pra desfazer.
               Confirme sua senha pra continuar.
             </p>
             <CampoSenha

@@ -13,7 +13,7 @@ export default function PoliticaDePrivacidadePage() {
 
         <div className="space-y-5 text-sm text-slate-700 leading-relaxed">
           <p>
-            O Olha Aí é um catálogo digital pra você compartilhar seus produtos por WhatsApp.
+            O Olha Aí é uma vitrine digital pra você compartilhar seus produtos por WhatsApp.
             Esta página explica quais dados a gente coleta quando você cria uma conta, pra quê,
             e quais direitos você tem sobre eles — conforme a Lei Geral de Proteção de Dados
             (LGPD).
@@ -22,7 +22,7 @@ export default function PoliticaDePrivacidadePage() {
           <section>
             <h2 className="font-semibold text-slate-800 mb-1.5">O que coletamos no cadastro</h2>
             <ul className="list-disc list-inside space-y-1">
-              <li><strong>Nome do negócio</strong> — fica público na sua página de catálogo.</li>
+              <li><strong>Nome do negócio</strong> — fica público na sua vitrine.</li>
               <li><strong>WhatsApp</strong> — fica público, é pra onde seus clientes te chamam.</li>
               <li><strong>E-mail</strong> — usado só pra login e recuperação de senha, não é público.</li>
               <li>
@@ -39,7 +39,7 @@ export default function PoliticaDePrivacidadePage() {
           <section>
             <h2 className="font-semibold text-slate-800 mb-1.5">O que você cadastra depois</h2>
             <p>
-              Nome, preço, descrição e foto dos produtos do seu catálogo — tudo isso é público,
+              Nome, preço, descrição e foto dos produtos da sua vitrine — tudo isso é público,
               já que é o objetivo do serviço (seus clientes verem e pedirem).
             </p>
           </section>

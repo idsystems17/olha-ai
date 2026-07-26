@@ -36,7 +36,7 @@ export default function OpengraphImage() {
           Veja o Olha Aí funcionando de verdade
         </div>
         <div style={{ display: 'flex', fontSize: 30, marginTop: 28, opacity: 0.92, maxWidth: 820 }}>
-          Teste o cadastro, o painel e o catálogo do cliente ao vivo, com exemplos reais.
+          Teste o cadastro, o painel e a vitrine do cliente ao vivo, com exemplos reais.
         </div>
         <div
           style={{

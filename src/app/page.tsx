@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Dancing_Script } from 'next/font/google'
-import { ArrowRight, CheckCircle2, Smartphone, ShoppingBag, PlayCircle } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Smartphone, ShoppingBag, PlayCircle, Infinity as InfinityIcon } from 'lucide-react'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
@@ -11,7 +11,7 @@ const JSON_LD = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description:
-    'Catálogo digital simples e prático pra quem vende pelo WhatsApp. Foto, preço e um botão que já leva pro pedido pronto, sem taxa por venda.',
+    'Vitrine digital simples e prática pra quem vende pelo WhatsApp. Foto, preço e um botão que já leva pro pedido pronto, sem taxa por venda.',
   offers: {
     '@type': 'Offer',
     price: '19.90',
@@ -32,7 +32,7 @@ export default function LandingPage() {
           </div>
         </div>
         <Link href="/login" className="text-sm font-medium text-slate-500 hover:text-slate-700">
-          Já tem catálogo? Entrar
+          Já tem vitrine? Entrar
         </Link>
       </header>
 
@@ -43,7 +43,7 @@ export default function LandingPage() {
             Sua vitrine bonita, no link do WhatsApp
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
-            Um catálogo simples pra mostrar o que você vende hoje — com foto, preço e um botão que já
+            Uma vitrine simples pra mostrar o que você vende hoje — com foto, preço e um botão que já
             abre o WhatsApp com o pedido pronto. Sem aplicativo pra instalar, sem taxa por venda.
           </p>
 
@@ -52,7 +52,7 @@ export default function LandingPage() {
               href="/cadastro"
               className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors group"
             >
-              <span>Criar meu catálogo grátis</span>
+              <span>Criar minha vitrine grátis</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <p className="text-sm sm:text-base font-medium text-slate-600">
@@ -89,7 +89,7 @@ export default function LandingPage() {
           <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-400 mb-8">
             Diga adeus ao &ldquo;manda foto no privado&rdquo; e &ldquo;qual o valor?&rdquo;
           </h2>
-          <div className="grid sm:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
             <div>
               <div className="w-11 h-11 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mx-auto mb-3">
                 <CheckCircle2 className="w-5 h-5" />
@@ -117,6 +117,15 @@ export default function LandingPage() {
                 O cliente clica em &ldquo;Pedir&rdquo; e a mensagem já chega pronta. Sem taxa, sem intermediário.
               </p>
             </div>
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3">
+                <InfinityIcon className="w-5 h-5" />
+              </div>
+              <h3 className="font-semibold text-slate-800 text-sm">Sem limite de itens</h3>
+              <p className="mt-1.5 text-sm text-slate-500">
+                Cadastra quantos produtos quiser — do primeiro ao centésimo, sem pagar mais por isso.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -132,7 +141,7 @@ export default function LandingPage() {
               href="/cadastro"
               className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-4 text-sm font-semibold tracking-wide shadow-md transition-colors"
             >
-              Criar meu catálogo grátis
+              Criar minha vitrine grátis
             </Link>
             <Link
               href="/como-funciona"

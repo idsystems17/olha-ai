@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Olha Aí',
     short_name: 'Olha Aí',
-    description: 'Catálogo digital simples pra quem vende pelo WhatsApp.',
+    description: 'Vitrine digital simples pra quem vende pelo WhatsApp.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

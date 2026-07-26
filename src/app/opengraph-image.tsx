@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const alt = 'Olha Aí — catálogo digital pra quem vende pelo WhatsApp'
+export const alt = 'Olha Aí — vitrine digital pra quem vende pelo WhatsApp'
 
 export default function OpengraphImage() {
   return new ImageResponse(
