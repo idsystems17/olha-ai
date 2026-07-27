@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 
 type CorpoAtualizacao = {
@@ -14,10 +15,10 @@ async function tenantDoUsuario(supabase: Awaited<ReturnType<typeof createClient>
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { erro: NextResponse.json({ error: 'Não autenticado.' }, { status: 401 }) }
 
-  const { data: tenant } = await supabase.from('tenants').select('id').eq('user_id', user.id).single()
+  const { data: tenant } = await supabase.from('tenants').select('id, slug').eq('user_id', user.id).single()
   if (!tenant) return { erro: NextResponse.json({ error: 'Vitrine não encontrada.' }, { status: 404 }) }
 
-  return { tenantId: tenant.id }
+  return { tenantId: tenant.id, tenantSlug: tenant.slug }
 }
 
 export async function PATCH(request: NextRequest, ctx: RouteContext<'/api/items/[id]'>) {
@@ -81,6 +82,8 @@ export async function PATCH(request: NextRequest, ctx: RouteContext<'/api/items/
     return NextResponse.json({ error: 'Erro ao atualizar item.' }, { status: 500 })
   }
 
+  revalidatePath(`/${resultado.tenantSlug}`)
+
   return NextResponse.json({ item })
 }
 
@@ -100,6 +103,8 @@ export async function DELETE(_request: NextRequest, ctx: RouteContext<'/api/item
     console.error('[items] Erro ao excluir:', error.message)
     return NextResponse.json({ error: 'Erro ao excluir item.' }, { status: 500 })
   }
+
+  revalidatePath(`/${resultado.tenantSlug}`)
 
   return NextResponse.json({ ok: true })
 }

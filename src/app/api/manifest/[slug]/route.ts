@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { versaoAparencia } from '@/lib/versao-aparencia'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

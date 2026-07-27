@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 
 type CorpoItem = {
@@ -27,10 +28,10 @@ async function tenantDoUsuario(supabase: Awaited<ReturnType<typeof createClient>
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { erro: NextResponse.json({ error: 'Não autenticado.' }, { status: 401 }) }
 
-  const { data: tenant } = await supabase.from('tenants').select('id').eq('user_id', user.id).single()
+  const { data: tenant } = await supabase.from('tenants').select('id, slug').eq('user_id', user.id).single()
   if (!tenant) return { erro: NextResponse.json({ error: 'Vitrine não encontrada.' }, { status: 404 }) }
 
-  return { tenantId: tenant.id }
+  return { tenantId: tenant.id, tenantSlug: tenant.slug }
 }
 
 export async function GET() {
@@ -85,6 +86,8 @@ export async function POST(request: NextRequest) {
     console.error('[items] Erro ao criar:', error.message)
     return NextResponse.json({ error: 'Erro ao criar item.' }, { status: 500 })
   }
+
+  revalidatePath(`/${resultado.tenantSlug}`)
 
   return NextResponse.json({ item })
 }

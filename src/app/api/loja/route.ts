@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 
 export async function PATCH(request: NextRequest) {
@@ -24,13 +25,15 @@ export async function PATCH(request: NextRequest) {
     .from('tenants')
     .update({ is_open: body.is_open })
     .eq('user_id', user.id)
-    .select('is_open')
+    .select('slug, is_open')
     .single()
 
   if (error || !tenant) {
     console.error('[loja] Erro ao atualizar is_open:', error?.message)
     return NextResponse.json({ error: 'Erro ao salvar.' }, { status: 500 })
   }
+
+  revalidatePath(`/${tenant.slug}`)
 
   return NextResponse.json({ tenant })
 }

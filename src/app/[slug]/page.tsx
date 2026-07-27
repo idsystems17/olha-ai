@@ -10,9 +10,10 @@ import { CatalogoItens } from '@/components/CatalogoItens'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
-// Sem isso, o Next pode servir uma versão antiga da página (nome/bio) depois
-// que a vendedora edita a Aparência — precisa buscar do banco a cada visita.
-export const dynamic = 'force-dynamic'
+// Cacheada por até 60s, mas as rotas que editam aparência/itens/loja chamam
+// revalidatePath nesse caminho — então uma edição da vendedora aparece na
+// hora mesmo assim, e visitas repetidas no meio tempo não martelam o banco.
+export const revalidate = 60
 
 type Item = {
   id: string

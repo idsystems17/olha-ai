@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { gerarIconeTenant } from '@/lib/gerar-icone-tenant'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 export const size = { width: 32, height: 32 }
 
 export default async function Icon({ params }: { params: Promise<{ slug: string }> }) {

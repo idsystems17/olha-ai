@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { PALETA } from '@/lib/paleta'
 
@@ -66,13 +67,16 @@ export async function PATCH(request: NextRequest) {
     .from('tenants')
     .update(atualizacao)
     .eq('user_id', user.id)
-    .select('name, bio, logo_url, cor_principal, cor_secundaria')
+    .select('slug, name, bio, logo_url, cor_principal, cor_secundaria')
     .single()
 
   if (error || !tenant) {
     console.error('[aparencia] Erro ao atualizar:', error?.message)
     return NextResponse.json({ error: 'Erro ao salvar alterações.' }, { status: 500 })
   }
+
+  revalidatePath(`/${tenant.slug}`)
+  revalidatePath(`/api/manifest/${tenant.slug}`)
 
   return NextResponse.json({ tenant })
 }
