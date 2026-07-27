@@ -7,6 +7,7 @@ import { linkPublico } from '@/lib/link-publico'
 import { formatarWhatsappVisual } from '@/lib/whatsapp'
 import { CompartilharBotao } from '@/components/CompartilharBotao'
 import { CatalogoItens } from '@/components/CatalogoItens'
+import { LIMITE_ITENS_POR_LOJA } from '@/lib/limites'
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
@@ -41,6 +42,7 @@ async function buscarDados(slug: string) {
     .eq('tenant_id', tenant.id)
     .order('is_available_today', { ascending: false })
     .order('name', { ascending: true })
+    .limit(LIMITE_ITENS_POR_LOJA)
 
   return { tenant, items: (items ?? []) as Item[] }
 }

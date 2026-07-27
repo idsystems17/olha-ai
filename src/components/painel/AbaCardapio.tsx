@@ -213,7 +213,7 @@ export function AbaCardapio({ itemsIniciais }: { itemsIniciais: Item[] }) {
           >
             {item.image_url ? (
               // eslint-disable-next-line @next/next/no-img-element -- foto vem do Supabase Storage
-              <img src={item.image_url} alt={item.name} className="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
+              <img src={item.image_url} alt={item.name} loading="lazy" className="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
             ) : (
               <div className="w-14 h-14 rounded-lg bg-slate-100 flex-shrink-0" />
             )}

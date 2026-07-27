@@ -75,7 +75,7 @@ export function CatalogoItens({
           <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 relative">
             {item.image_url ? (
               // eslint-disable-next-line @next/next/no-img-element -- foto vem do Supabase Storage
-              <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+              <img src={item.image_url} alt={item.name} loading="lazy" className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-slate-300">
                 <ShoppingBag className="w-7 h-7" />

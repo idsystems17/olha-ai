@@ -5,6 +5,7 @@ import { PainelClient } from '@/components/painel/PainelClient'
 import { PopupAssinaturaAtiva } from '@/components/painel/PopupAssinaturaAtiva'
 import { linkCheckoutKiwify } from '@/lib/kiwify'
 import { statusTrial } from '@/lib/trial'
+import { LIMITE_ITENS_POR_LOJA } from '@/lib/limites'
 
 export async function generateMetadata() {
   const base = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '')
@@ -31,6 +32,7 @@ export default async function PainelPage() {
     .select('id, name, price, description, image_url, is_available_today')
     .eq('tenant_id', tenant.id)
     .order('created_at', { ascending: false })
+    .limit(LIMITE_ITENS_POR_LOJA)
 
   return (
     <>

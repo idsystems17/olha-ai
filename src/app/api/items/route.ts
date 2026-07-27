@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { LIMITE_ITENS_POR_LOJA } from '@/lib/limites'
 
 type CorpoItem = {
   name?: string
@@ -44,6 +45,7 @@ export async function GET() {
     .select('id, name, price, description, image_url, is_available_today, created_at')
     .eq('tenant_id', resultado.tenantId)
     .order('created_at', { ascending: false })
+    .limit(LIMITE_ITENS_POR_LOJA)
 
   if (error) {
     console.error('[items] Erro ao listar:', error.message)
@@ -68,6 +70,15 @@ export async function POST(request: NextRequest) {
   const erroValidacao = validarCampos(body)
   if (erroValidacao) {
     return NextResponse.json({ error: erroValidacao }, { status: 400 })
+  }
+
+  const { count: totalAtual } = await supabase
+    .from('items')
+    .select('id', { count: 'exact', head: true })
+    .eq('tenant_id', resultado.tenantId)
+
+  if ((totalAtual ?? 0) >= LIMITE_ITENS_POR_LOJA) {
+    return NextResponse.json({ error: 'Limite de itens atingido. Fale com o suporte.' }, { status: 400 })
   }
 
   const { data: item, error } = await supabase
